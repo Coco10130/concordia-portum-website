@@ -1,0 +1,16 @@
+body {
+    background-color: #0e0d0d;
+   /*  background: url('images/backgound.jpg') no-repeat center; */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    padding: 23px 50px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.form-label-custom {
+    font-family: 'Constantia', sans-serif;
+}

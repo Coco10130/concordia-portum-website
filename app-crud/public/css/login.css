@@ -1,0 +1,47 @@
+body {
+    background-color: #0e0d0d;
+    /* background: url('images/backgound.jpg') no-repeat center; */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    padding: 23px 50px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.form-floating #floatingInput {
+    background: url('images/person-icon.png') no-repeat left center;
+    background-color: #ffffff;
+    background-size: 15px;
+    padding-left: 36px !important;
+}
+
+.form-floating #floatingPassword {
+    background: url('images/password-icon.png') no-repeat left center;
+    background-color: #ffffff;
+    background-size: 15px;
+    padding-left: 36px !important;
+}
+
+.form-floating #floatingInput,
+.form-floating #floatingPassword {
+    background-position: left 10px center;
+}
+
+.form-floating label{
+    margin-left: 24px;
+}
+/* 
+.form-floating label {
+    color: #000000;
+} */
+
+.btn {
+    width: 100px;
+}
+
+.form-label-custom {
+    font-family: 'Constantia', sans-serif;
+}

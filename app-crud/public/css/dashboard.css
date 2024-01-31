@@ -1,0 +1,34 @@
+.product-container {
+    padding: 30px 90px;
+    top: 10px;
+}
+
+
+.product-card:hover {
+    transform: scale(1.1);
+}
+
+.product-card {
+    transition: 0.3s ease-in-out;
+}
+
+.outer-container {
+    padding-bottom: -100px;
+}
+
+.product-card img {
+    width: 280px;
+    height: 280px;
+}
+
+.navigation .container .product-link {
+    color: rgb(0, 0, 0);
+    padding: 5px 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+.product-link:hover {
+    background-color: #6f3df8;
+}

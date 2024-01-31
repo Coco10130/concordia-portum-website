@@ -1,0 +1,86 @@
+header {
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+    backdrop-filter: blur(50px);
+}
+
+header .profile img {
+    margin-left: 100px;
+    margin-right: 20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+}
+
+header .logo {
+    margin-top: 10px;
+    font-family: 'Kavoon', cursive;
+}
+
+header .form-floating {
+    margin-top: 8px;
+    margin-left: 100px;
+    width: 300px;
+}
+
+header .form-floating .form-control {
+    height: 20px;
+    border-radius: 20px;
+}
+
+header a {
+    color: #000000;
+    text-decoration: none;
+}
+
+header .cart {
+    margin-left: auto;
+    margin-top: 17px;
+}
+
+header .cart img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: 17px auto;
+}
+
+.product-item img {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.product-name {
+    margin-left: 40px;
+}
+
+.form-check-input {
+    height: 20px;
+    width: 20px;
+}
+
+.product-item-text,
+.product-price,
+.price,
+.total-price,
+.quantity,
+.quantity-text,
+.product-item .product-name {
+    font-family: 'Kavoon', cursive;
+}
+
+.quantity-input .quantity {
+    font-size: 15px;
+}
+
+.product-col {
+    background-color: #909090;
+}
+
+
+.product-col {
+    border: 1px solid black;
+}
