@@ -47,9 +47,6 @@
                                             <input type="file" id="imageInput" accept="image/*" onchange="uploadImage()"
                                                 aria-label="Upload Image">
                                         </label>
-                                        <div class="save-button mt-5 d-flex align-items-center justify-content-center">
-                                            <button type="button" class="btn btn-light mb-5">Save</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -94,64 +91,13 @@
                     </div>
 
                     {{-- profile details --}}
-                    <div class="col-5 d-flex justify-content-center align-items-center" >
-                        <div class="container-fluid">
-                            <div class="row mt-5">
-                                <div class="col d-flex justify-content-start align-items-center">
-                                    <p class="user-name">{{ $user->userName }}</p>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col d-flex justify-content-center align-items-center">
-                                    <div class="input-group mb-2">
-                                        <p class="user-name">{{ $user->email }}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col d-flex justify-content-center align-items-center">
-                                    <div class="input-group mb-2">
-                                        <input type="number" class="form-control" placeholder="Phone Number"
-                                            aria-label="Phone Number">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="male" id="male">
-                                        <label class="form-check-label" for="male">
-                                            Male
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="male" id="female">
-                                        <label class="form-check-label" for="female">
-                                            Female
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3 mb-5">
-                                <div class="col">
-                                    <div class="input-group">
-                                        <label class="input-group-text" for="birthday">Birthday:</label>
-                                        <input type="date" class="form-control" id="birthday" name="birthday">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-5 d-flex justify-content-start align-items-center">
+                        {{-- profile content goes here --}}
+                        @include('shared.edit-profile')
                     </div>
 
                     <!-- <div class="col d-flex justify-content-center align-items-end">
-                    </div> -->
+                        </div> -->
                 </div>
             </div>
         </div>

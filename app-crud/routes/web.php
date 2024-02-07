@@ -31,3 +31,6 @@ Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('logi
 Route::resource('/cart', CartController::class);
 
 Route::resource('/profile', ProfileController::class);
+
+Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+

@@ -3,27 +3,14 @@
 
     <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Registration</h1>
 
-    {{-- <div class="row">
-        <div class="col-md-6">
-            <div class="form-floating mb-3 mt-3 text-center">
-                <input type="text" class="form-control" id="firstName" placeholder="First" name="firstName">
-                <label class="form-label-custom" for="firstName">First Name</label>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="form-floating mb-3 mt-3 text-center">
-                <input type="text" class="form-control" id="lastName" placeholder="Last" name="lastName">
-                <label class="form-label-custom" for="lastName">Last Name</label>
-            </div>
-        </div>
-    </div> --}}
-
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
-                <input type="text" class="form-control" id="user-name" placeholder="Username" name="userName">
+                <input type="text" class="form-control @error('userName') is-invalid @enderror" id="user-name" placeholder="Username" name="userName">
                 <label class="form-label-custom" for="user-name">Username</label>
+                @error('userName')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>
@@ -31,8 +18,11 @@
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
-                <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" name="email">
                 <label class="form-label-custom" for="email">Email</label>
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>
@@ -40,8 +30,11 @@
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" name="password">
                 <label class="form-label-custom" for="password">Password</label>
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>

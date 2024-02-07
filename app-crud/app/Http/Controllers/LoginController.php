@@ -22,8 +22,7 @@ class LoginController extends Controller
         if (auth()->attempt($validated))
         {
             return redirect()
-                ->route('products.index')
-                ->with('success', 'Logged in successfully!');
+                ->route('products.index');
         } else {
             $message = 'Invalid credentials. Please try again.';
             return view('login', compact('message'));

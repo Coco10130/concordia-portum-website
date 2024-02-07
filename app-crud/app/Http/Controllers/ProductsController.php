@@ -23,17 +23,24 @@ class ProductsController extends Controller
         ]);
 
         // Upload image
-        $imagePath = $request->file('image')->store('products');
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+
+            $filename = time().'.'.$extension;
+
+            $path = 'images/';
+            $file->move($path, $filename);
+        }
 
         // Create new product
         $product = new Products();
-        $product->image = $imagePath;
+        $product->image = $path.$filename;
         $product->product_name = $request->product_name;
         $product->price = $request->price;
         $product->save();
 
         return redirect()
-            ->route('products.index')
-            ->with('success', 'Product created successfully.');
+            ->route('products.index');
     }
 }

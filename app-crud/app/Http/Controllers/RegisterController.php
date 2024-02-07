@@ -28,7 +28,6 @@ class RegisterController extends Controller
         ]);
 
         return redirect()
-            ->route('login.index')
-            ->with('success', 'Account created successfully!');
+            ->route('login.index');
     }
 }
