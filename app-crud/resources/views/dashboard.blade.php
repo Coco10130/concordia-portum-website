@@ -25,7 +25,7 @@
                                         @endif
                                         <div class="col-4 mt-5">
                                             <div class="card product-card" style="width: 18rem;">
-                                                <img src="{{ asset($product->image) }}" class="card-img-top" alt="Product Image">
+                                                <img src="{{ asset('images') }}/{{ $product->image }}" class="card-img-top" alt="Product Image">
                                                 <div class="card-body">
                                                     <h5 class="card-title product-name">{{ $product->product_name }}</h5>
                                                     <h6 class="price">₱{{ number_format($product->price, 2) }}</h6>

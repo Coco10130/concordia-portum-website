@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-floating mt-3 d-flex justify-content-center">
-        <input type="submit" class="btn btn-outline-secondary" value="submit" name="submit">
+        <input type="submit" class="btn btn-outline-secondary" value="Login" name="submit">
         <label for="remember-me" class="text-dark"></label>
     </div>
     @if (isset($message))

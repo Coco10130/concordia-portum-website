@@ -12,14 +12,14 @@ body {
 }
 
 .form-floating #floatingInput {
-    background: url('images/person-icon.png') no-repeat left center;
+    background: url('/images/person-icon.png') no-repeat left center;
     background-color: #ffffff;
     background-size: 15px;
     padding-left: 36px !important;
 }
 
 .form-floating #floatingPassword {
-    background: url('images/password-icon.png') no-repeat left center;
+    background: url('/images/password-icon.png') no-repeat left center;
     background-color: #ffffff;
     background-size: 15px;
     padding-left: 36px !important;

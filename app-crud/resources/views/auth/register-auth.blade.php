@@ -3,7 +3,7 @@
 
     <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Registration</h1>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-6">
             <div class="form-floating mb-3 mt-3 text-center">
                 <input type="text" class="form-control" id="firstName" placeholder="First" name="firstName">
@@ -15,6 +15,15 @@
             <div class="form-floating mb-3 mt-3 text-center">
                 <input type="text" class="form-control" id="lastName" placeholder="Last" name="lastName">
                 <label class="form-label-custom" for="lastName">Last Name</label>
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3 text-center">
+                <input type="text" class="form-control" id="user-name" placeholder="Username" name="userName">
+                <label class="form-label-custom" for="user-name">Username</label>
             </div>
         </div>
     </div>
@@ -48,7 +57,7 @@
     </div>
 
     <div class="form-floating d-flex justify-content-center">
-        <input type="submit" name="submit" class="btn btn-outline-secondary" value="submit">
+        <input type="submit" name="submit" class="btn btn-outline-secondary" value="Register">
         <label for="remember-me" class="text-dark"></label><br>
     </div>
 </form>

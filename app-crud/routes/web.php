@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,16 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::redirect('/', '/register');
+Route::redirect('/', '/login');
 
 Route::resource('/products', ProductsController::class);
 
 Route::resource('/register', RegisterController::class);
 
 Route::resource('/login', LoginController::class);
+
 Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('login.auth');
+
+Route::resource('/cart', CartController::class);
+
+Route::resource('/profile', ProfileController::class);
