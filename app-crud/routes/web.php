@@ -39,3 +39,8 @@ Route::get('/my-shop', [ProfileController::class, 'myShop'])->name('myShop');
 Route::post('/register-seller', [ProfileController::class, 'registerSeller'])->name('registerSeller');
 
 Route::get('/register-seller', [ProfileController::class, 'registerView'])->name('registerView');
+
+Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->name('products.addToCart');
+
+Route::get('/cart', [CartController::class, 'index']);
+

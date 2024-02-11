@@ -35,9 +35,10 @@
                                             <div class="card-body">
                                                 <h5 class="card-title product-name">{{ $product->product_name }}</h5>
                                                 <h6 class="price">₱{{ number_format($product->price, 2) }}</h6>
-                                                <p class="btn-holder mt-4"> <a
-                                                        href="#"
-                                                        class="btn btn-outline-secondary">Add to cart</a></p>
+                                                <form action="{{ route('products.addToCart', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-secondary">Add to cart</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

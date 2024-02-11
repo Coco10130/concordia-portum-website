@@ -45,4 +45,28 @@ class ProductsController extends Controller
         return redirect()
             ->route('myShop')->with('success', 'Product added successfully!');
     }
+
+    public function addToCart(Request $request, $productId)
+    {
+        $product = Product::findOrFail($productId);
+        
+        $user = auth()->user();
+
+        $cart = $request->session()->get('cart', []);
+
+        if (isset($cart[$user->id][$productId])) {
+            $cart[$user->id][$productId]['quantity']++;
+        } else {
+            $cart[$user->id][$productId] = [
+                'name' => $product->product_name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => 1
+            ];
+        }
+
+        $request->session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
 }
