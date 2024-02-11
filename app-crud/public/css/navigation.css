@@ -34,3 +34,9 @@ header a {
     text-decoration: none;
 }
 
+footer {
+    background-color: #fffffffe;
+    z-index: 99;
+    width: 100%;
+    backdrop-filter: blur(500px);
+}

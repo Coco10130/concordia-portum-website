@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Products;
+use App\Models\Product;
 
 class ProductsController extends Controller
 {
     public function index()
     {
         return view('dashboard',[
-            'products' => Products::all()
+            'products' => Product::all()
         ]);
     }
 
@@ -34,13 +34,15 @@ class ProductsController extends Controller
         }
 
         // Create new product
-        $product = new Products();
+        $product = new Product();
         $product->image = $path.$filename;
         $product->product_name = $request->product_name;
         $product->price = $request->price;
+        $product->user_id = auth()->user()->id;
         $product->save();
+        
 
         return redirect()
-            ->route('products.index');
+            ->route('myShop')->with('success', 'Product added successfully!');
     }
 }

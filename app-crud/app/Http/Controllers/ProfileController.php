@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Seller;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -12,6 +14,21 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         return view('profile', compact('user'));
+    }
+
+    public function myShop()
+    {
+        $user = Auth::user();
+        $seller = $user->seller;
+
+        $products = Product::where('user_id', $user->id)->get();
+
+        return view('my-shop', compact('user', 'seller', 'products'));
+    }
+
+    public function registerView()
+    {
+        return view('my-shop-register');
     }
 
     public function update(Request $request)
@@ -34,5 +51,30 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back();
+    }
+
+    public function registerSeller(Request $request)
+    {
+        $validated = $request->validate([
+            'shop_name' => 'required',
+            'shop_email' => 'required|email|unique:sellers,shop_email',
+            'shop_phone_number' => 'required|size:11',
+        ]);
+
+        // Retrieve the authenticated user
+        $user = auth()->user();
+        $user->is_seller = true;
+        $user->save();
+
+        // Create or update the associated seller record
+        $user->seller()->updateOrCreate(
+            [],
+            [
+                'shop_name' => $validated['shop_name'],
+                'shop_email' => $validated['shop_email'],
+                'shop_phone_number' => $validated['shop_phone_number'],
+            ],
+        );
+        return redirect()->route('myShop')->with('success', 'You have become a seller!');
     }
 }

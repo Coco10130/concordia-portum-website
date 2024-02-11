@@ -34,3 +34,8 @@ Route::resource('/profile', ProfileController::class);
 
 Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
+Route::get('/my-shop', [ProfileController::class, 'myShop'])->name('myShop');
+
+Route::post('/register-seller', [ProfileController::class, 'registerSeller'])->name('registerSeller');
+
+Route::get('/register-seller', [ProfileController::class, 'registerView'])->name('registerView');

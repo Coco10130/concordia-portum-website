@@ -9,13 +9,10 @@
         <div class="col-2 mt-5 d-flex align-items-center">
             <div class="navigation">
                 <ul>
-                    <a href="#">My Account</a>
+                    <a href="#">My Profile</a>
                 </ul>
                 <ul>
-                    <a href="#">My Purchase</a>
-                </ul>
-                <ul>
-                    <a href="#">My Vouchers</a>
+                    <a href="/my-shop">My Shop</a>
                 </ul>
             </div>
         </div>
@@ -56,7 +53,7 @@
 
                     {{-- profile labels --}}
                     <div class="col-2">
-                        <div class="container-fluid">
+                        <div class="container-fluid pb-5">
                             <div class="row mt-5">
                                 <div class="col d-flex justify-content-end align-items-center">
                                     <p class="user-name">Username:</p>
@@ -95,9 +92,6 @@
                         {{-- profile content goes here --}}
                         @include('shared.edit-profile')
                     </div>
-
-                    <!-- <div class="col d-flex justify-content-center align-items-end">
-                        </div> -->
                 </div>
             </div>
         </div>

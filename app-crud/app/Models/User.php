@@ -17,25 +17,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'userName',
-        'name',
-        'email',
-        'password',
-        'phoneNumber',
-        'gender',
-        'birthDate'
-    ];
+    protected $fillable = ['userName', 'name', 'email', 'password', 'phoneNumber', 'gender', 'birthDate', 'is_seller'];
+
+    public function seller()
+    {
+        return $this->hasOne(Seller::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.

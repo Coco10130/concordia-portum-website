@@ -3,6 +3,12 @@
 
     <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Login</h1>
 
+    @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
     <div class="form-floating mb-3">
         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
         <label class="form-label-custom" for="floatingInput">Email</label>
