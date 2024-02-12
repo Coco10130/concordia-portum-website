@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seller;
 use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -13,21 +14,24 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+        return view('profile', compact('user', 'cartItemsCount'));
     }
 
     public function myShop()
     {
         $user = Auth::user();
         $seller = $user->seller;
+        $cartItemsCount = Cart::where('user_id', $user->id)->count();
 
         $products = Product::where('user_id', $user->id)->get();
 
-        return view('my-shop', compact('user', 'seller', 'products'));
+        return view('my-shop', compact('user', 'seller', 'products', 'cartItemsCount'));
     }
 
     public function registerView()
     {
+
         return view('my-shop-register');
     }
 

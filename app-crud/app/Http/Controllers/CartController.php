@@ -12,8 +12,9 @@ class CartController extends Controller
     {
         $user = auth()->user();
         $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItemsCount = $cartItems->count();
 
-        return view('cart', compact('cartItems'));
+        return view('cart', compact('cartItems', 'cartItemsCount'));
     }
 
     public function addToCart(Request $request, $productId)
@@ -38,4 +39,14 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
+
+    public function removeItems(Request $request)
+{
+    $checkedProductIds = $request->input('product_ids');
+
+    Cart::whereIn('product_id', $checkedProductIds)->delete();
+
+    return redirect()->route('cart.index')->with('success', 'Producs already checked out!');
 }
+}
+

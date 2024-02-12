@@ -28,8 +28,6 @@ Route::resource('/login', LoginController::class);
 
 Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('login.auth');
 
-Route::resource('/cart', CartController::class);
-
 Route::resource('/profile', ProfileController::class);
 
 Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,5 +40,6 @@ Route::get('/register-seller', [ProfileController::class, 'registerView'])->name
 
 Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->name('products.addToCart');
 
-Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
+Route::post('/cart/remove-items', [CartController::class, 'removeItems'])->name('cart.remove-items');

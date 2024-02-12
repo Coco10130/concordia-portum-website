@@ -23,19 +23,43 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-3 d-flex align-items-center justify-content-center">
                         <a class="cart" href="/cart">
-                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px; color: #000000;"> <span
-                                    class="badge bg-danger" style="font-size: 11px;">0</span></i>
+                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px; color: #000000;">
+                                <span id="cartItemCount" class="badge bg-danger"
+                                    style="font-size: 11px;">{{ $cartItemsCount }}</span>
+                            </i>
                         </a>
 
-                        <a  class="profile" href="/profile" class="profile"><img src="/images/user-profile.jpeg"
-                            class="user-image" alt="profile"></a>
+                        <a class="profile" href="/profile" class="profile"><img src="/images/user-profile.jpeg"
+                                class="user-image" alt="profile"></a>
                     </div>
                 </div>
             </div>
         </header>
     </div>
-
 </div>
+
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        updateCartBadge();
+
+        function updateCartBadge() {
+            // Ajax request to get the count of cart items
+            $.ajax({
+                url: '/cart/count', // Update the URL based on your route setup
+                type: 'GET',
+                success: function(response) {
+                    $('#cartItemCount').text(response
+                    .count); // Update the badge value with the count
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    });
+</script> --}}

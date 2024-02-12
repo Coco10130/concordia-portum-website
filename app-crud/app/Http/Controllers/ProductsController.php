@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Http\JsonResponse;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        return view('dashboard',[
-            'products' => Product::all()
-        ]);
+        $user = auth()->user();
+        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+        $products = Product::all();
+
+        return view('dashboard', compact('cartItemsCount', 'products'));
     }
+
 
     public function store(Request $request)
     {
@@ -27,7 +32,7 @@ class ProductsController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
 
-            $filename = time().'.'.$extension;
+            $filename = time() . '.' . $extension;
 
             $path = 'images/';
             $file->move($path, $filename);
@@ -35,21 +40,19 @@ class ProductsController extends Controller
 
         // Create new product
         $product = new Product();
-        $product->image = $path.$filename;
+        $product->image = $path . $filename;
         $product->product_name = $request->product_name;
         $product->price = $request->price;
         $product->user_id = auth()->user()->id;
         $product->save();
-        
 
-        return redirect()
-            ->route('myShop')->with('success', 'Product added successfully!');
+        return redirect()->route('myShop')->with('success', 'Product added successfully!');
     }
 
     public function addToCart(Request $request, $productId)
     {
         $product = Product::findOrFail($productId);
-        
+
         $user = auth()->user();
 
         $cart = $request->session()->get('cart', []);
@@ -61,7 +64,7 @@ class ProductsController extends Controller
                 'name' => $product->product_name,
                 'price' => $product->price,
                 'image' => $product->image,
-                'quantity' => 1
+                'quantity' => 1,
             ];
         }
 
