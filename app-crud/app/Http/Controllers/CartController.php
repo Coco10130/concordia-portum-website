@@ -46,7 +46,7 @@ class CartController extends Controller
 
     Cart::whereIn('product_id', $checkedProductIds)->delete();
 
-    return redirect()->route('cart.index')->with('success', 'Producs already checked out!');
+    return redirect()->route('cart.index')->with('success', 'Products already checked out!');
 }
 }
 
