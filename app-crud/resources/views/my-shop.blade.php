@@ -9,10 +9,10 @@
         <div class="col-2 mt-5 d-flex align-items-center">
             <div class="navigation">
                 <ul>
-                    <a href="/profile">My Profile</a>
+                    <a href="/profile" class="{{ Request::is('profile') ? 'active' : '' }}">My Profile</a>
                 </ul>
                 <ul>
-                    <a href="#">My Shop</a>
+                    <a href="/my-shop" class="{{ Request::is('my-shop') ? 'active' : '' }}">My Shop</a>
                 </ul>
             </div>
         </div>
@@ -92,6 +92,9 @@
                         <div class="mt-4 col d-flex justify-content-center align-items-center">No products available</div>
                     @else
                         @include('shared.products')
+                        @error('productName')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
                     @endif
             </div>
         </div>

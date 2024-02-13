@@ -4,8 +4,9 @@
 }
 
 .navigation a {
-    color: black;
+    color: rgb(0, 0, 0);
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
 }
 
 .navigation ul{
@@ -80,4 +81,17 @@
     transition: .3s ease-in-out;
     border-radius: 30px;
     padding: 6px 6px;
+}
+
+.my-profile {
+    border-bottom: 2px solid rgb(0, 0, 0);
+    width: 90%;
+}
+
+.navigation a[href="/profile"].active,
+.navigation a[href="/profile"]:hover,
+.navigation a[href="/my-shop"].active,
+.navigation a[href="/my-shop"]:hover {
+    color: #626161;
+    background-color: rgb(0, 250, 250);
 }

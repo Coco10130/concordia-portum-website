@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::resource('/login', LoginController::class);
 
 Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('login.auth');
 
-Route::resource('/profile', ProfileController::class);
+Route::resource('profile', ProfileController::class);
 
 Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
@@ -40,6 +41,18 @@ Route::get('/register-seller', [ProfileController::class, 'registerView'])->name
 
 Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->name('products.addToCart');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::post('/cart/remove-items', [CartController::class, 'removeItems'])->name('cart.remove-items');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot.password.view');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgot.password');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
+
+Route::post('/verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('verify.code');
+
+Route::get('/verify-code', [ForgotPasswordController::class, 'verifyCodeView'])->name('verify.code.view');

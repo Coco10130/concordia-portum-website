@@ -100,39 +100,33 @@
 @endsection
 
 <script>
-    // Function to update the total
     function updateTotal() {
-        let subtotal = 0;
-        let totalItems = 0;
-        const checkboxes = document.querySelectorAll('.form-check-input:checked');
-        checkboxes.forEach(checkbox => {
-            const price = parseFloat(checkbox.closest('.row').querySelector('.product-price').textContent.slice(
-                2));
-            const quantity = parseInt(checkbox.closest('.row').querySelector('.quantity-text').textContent);
-            subtotal += price * quantity;
-            totalItems += quantity;
-        });
+    let subtotal = 0;
+    let totalItems = 0;
+    const checkboxes = document.querySelectorAll('.form-check-input:checked');
+    checkboxes.forEach(checkbox => {
+        const priceText = checkbox.closest('.row').querySelector('.product-price').textContent;
+        const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+        const quantity = parseInt(checkbox.closest('.row').querySelector('.quantity-text').textContent);
+        subtotal += price * quantity;
+        totalItems += quantity;
+    });
 
-        // Update subtotal
-        const subtotalElement = document.getElementById('subtotal-value');
-        subtotalElement.textContent = formatCurrency(subtotal);
+    const subtotalElement = document.getElementById('subtotal-value');
+    subtotalElement.textContent = formatCurrency(subtotal);
 
-        // Calculate tax
-        const tax = subtotal * 0.1;
-        const taxElement = document.getElementById('tax-value');
-        taxElement.textContent = formatCurrency(tax);
+    const tax = subtotal * 0.05;
+    const taxElement = document.getElementById('tax-value');
+    taxElement.textContent = formatCurrency(tax);
 
-        // Update total
-        const total = subtotal + tax;
-        const totalElement = document.getElementById('total-value');
-        totalElement.textContent = formatCurrency(total);
+    const total = subtotal + tax;
+    const totalElement = document.getElementById('total-value');
+    totalElement.textContent = formatCurrency(total);
 
-        // Update total items
-        const totalItemsElement = document.getElementById('total-items-value');
-        totalItemsElement.textContent = totalItems.toLocaleString();
-    }
+    const totalItemsElement = document.getElementById('total-items-value');
+    totalItemsElement.textContent = totalItems.toLocaleString();
+}
 
-    // Format currency function
     function formatCurrency(amount) {
         return '₱' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }

@@ -32,8 +32,13 @@
                             </i>
                         </a>
 
-                        <a class="profile" href="/profile" class="profile"><img src="/images/user-profile.jpeg"
-                                class="user-image" alt="profile"></a>
+                        <a class="profile" href="/profile" class="profile">
+                            @if ($user->image)
+                                <img src="{{ asset($user->image) }}" alt="Profile" id="profileImage">
+                            @else
+                                <img src="/images/profiles/default-picture.png" alt="Profile" id="profileImage">
+                            @endif
+                        </a>
                     </div>
                 </div>
             </div>

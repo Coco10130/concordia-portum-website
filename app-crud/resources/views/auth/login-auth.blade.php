@@ -19,7 +19,7 @@
     </div>
 
     <div class="text-end mb-3 mt-3">
-        <a class="forgot-pass" href="#" style="text-decoration: none; color: #000000;">Forgot Password</a>
+        <a class="forgot-pass" href="{{ route('forgot.password.view') }}" style="text-decoration: none; color: #000000;">Forgot Password</a>
     </div>
 
     <div class="form-floating mt-3 d-flex justify-content-center">

@@ -14,7 +14,7 @@ class CartController extends Controller
         $cartItems = Cart::where('user_id', $user->id)->get();
         $cartItemsCount = $cartItems->count();
 
-        return view('cart', compact('cartItems', 'cartItemsCount'));
+        return view('cart', compact('cartItems', 'cartItemsCount', 'user'));
     }
 
     public function addToCart(Request $request, $productId)

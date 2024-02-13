@@ -42,8 +42,11 @@
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
-                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password" name="password_confirmation">
+                <input type="password" class="form-control @error('confirn-password') is-invalid @enderror" id="confirm-password" placeholder="Confirm Password" name="password_confirmation">
                 <label class="form-label-custom" for="confirm-password">Confirm Password</label>
+                @error('confirm-password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         

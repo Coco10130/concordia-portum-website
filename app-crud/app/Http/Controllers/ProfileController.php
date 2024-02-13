@@ -31,30 +31,42 @@ class ProfileController extends Controller
 
     public function registerView()
     {
-
         return view('my-shop-register');
     }
 
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'gender' => 'required|in:male,female',
+            'gender' => 'nullable|in:male,female',
             'phoneNumber' => 'nullable|size:11',
-            'birthDate' => 'required',
+            'birthDate' => 'nullable',
+            'image' => 'nullable|image',
         ]);
 
         $user = auth()->user();
 
-        $user->gender = $request->input('gender');
-        if ($request->has('phoneNumber')) {
-            $user->phoneNumber = $request->input('phoneNumber');
+        if ($user->image && file_exists(public_path($user->image))) {
+            if (!unlink(public_path($user->image))) {
+                return redirect()->back()->with('error', 'Failed to delete the old image file.');
+            }
         }
-        if ($request->has('birthDate')) {
-            $user->birthDate = $request->input('birthDate');
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $path = 'images/profiles/';
+
+            if (!$file->move(public_path($path), $fileName)) {
+                return redirect()->back()->with('error', 'Failed to move the uploaded image file.');
+            }
+
+            $user->image = $path . $fileName;
         }
+
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
     public function registerSeller(Request $request)
@@ -65,12 +77,10 @@ class ProfileController extends Controller
             'shop_phone_number' => 'required|size:11',
         ]);
 
-        // Retrieve the authenticated user
         $user = auth()->user();
         $user->is_seller = true;
         $user->save();
 
-        // Create or update the associated seller record
         $user->seller()->updateOrCreate(
             [],
             [

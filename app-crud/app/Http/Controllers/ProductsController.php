@@ -15,7 +15,7 @@ class ProductsController extends Controller
         $cartItemsCount = Cart::where('user_id', $user->id)->count();
         $products = Product::all();
 
-        return view('dashboard', compact('cartItemsCount', 'products'));
+        return view('dashboard', compact('cartItemsCount', 'products', 'user'));
     }
 
 
@@ -23,7 +23,7 @@ class ProductsController extends Controller
     {
         $request->validate([
             'image' => 'required|image',
-            'product_name' => 'required|string',
+            'product_name' => 'required|string|unique:products,product_name',
             'price' => 'required|numeric',
         ]);
 
