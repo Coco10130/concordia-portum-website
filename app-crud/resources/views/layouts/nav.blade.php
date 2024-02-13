@@ -46,25 +46,3 @@
     </div>
 </div>
 
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        updateCartBadge();
-
-        function updateCartBadge() {
-            // Ajax request to get the count of cart items
-            $.ajax({
-                url: '/cart/count', // Update the URL based on your route setup
-                type: 'GET',
-                success: function(response) {
-                    $('#cartItemCount').text(response
-                    .count); // Update the badge value with the count
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
-    });
-</script> --}}

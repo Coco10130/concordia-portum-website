@@ -5,6 +5,15 @@
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
+                <input type="email" class="form-control" id="floatingPassword" placeholder="Password" name="email">
+                <label class="form-label-custom" for="floatingPassword">Email</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3 text-center">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                 <label class="form-label-custom" for="floatingPassword">New Password</label>
             </div>

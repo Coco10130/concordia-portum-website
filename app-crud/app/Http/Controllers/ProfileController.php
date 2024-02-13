@@ -45,12 +45,6 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
-        if ($user->image && file_exists(public_path($user->image))) {
-            if (!unlink(public_path($user->image))) {
-                return redirect()->back()->with('error', 'Failed to delete the old image file.');
-            }
-        }
-
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -61,7 +55,25 @@ class ProfileController extends Controller
                 return redirect()->back()->with('error', 'Failed to move the uploaded image file.');
             }
 
+            if ($user->image && file_exists(public_path($user->image))) {
+                if (!unlink(public_path($user->image))) {
+                    return redirect()->back()->with('error', 'Failed to delete the old image file.');
+                }
+            }
+
             $user->image = $path . $fileName;
+        }
+
+        if ($request->filled('gender')) {
+            $user->gender = $request->input('gender');
+        }
+
+        if ($request->filled('phoneNumber')) {
+            $user->phoneNumber = $request->input('phoneNumber');
+        }
+
+        if ($request->filled('birthDate')) {
+            $user->birthDate = $request->input('birthDate');
         }
 
         $user->save();

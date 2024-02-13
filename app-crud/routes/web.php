@@ -52,7 +52,3 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswor
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
 
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
-
-Route::post('/verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('verify.code');
-
-Route::get('/verify-code', [ForgotPasswordController::class, 'verifyCodeView'])->name('verify.code.view');

@@ -16,40 +16,27 @@ class ForgotPasswordController extends Controller
         return view('forgot-password');
     }
 
+
     public function forgotPassword(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users',
         ]);
 
-        $token = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $token = Str::random(64);
 
-        DB::table('password_resets')->updateOrInsert(['email' => $request->email], ['token' => $token, 'created_at' => now()]);
-
-        Mail::send('emails.forgot-password', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Verification Code for Password Reset');
-        });
-
-        return redirect()->route('verify.code.view')->with('success', 'We have sent a verification code to your email!');
-    }
-
-    public function verifyCode(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'code' => 'required|digits:6',
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now(),
         ]);
 
-        $passwordReset = DB::table('password_resets')
-            ->where('email', $request->email)
-            ->first();
+        Mail::send('emails.forgot-password', ['token' => $token], function($message) use ($request){
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
 
-        if ($passwordReset->token != $request->code) {
-            return redirect()->back()->with('error', 'Invalid verification code.');
-        }
-
-        return redirect()->route('reset.password', ['token' => $passwordReset->token]);
+        return redirect()->to(route("forgot.password.view"))->with('success', 'We have send a email to reset your password');
     }
 
     public function resetPassword($token)
@@ -72,6 +59,8 @@ class ForgotPasswordController extends Controller
             ])
             ->first();
 
+            
+
         if (!$updatePassword) {
             return redirect()->to(route('reset.password'))->with('error', 'Invalid');
         }
@@ -85,8 +74,4 @@ class ForgotPasswordController extends Controller
         return redirect()->to(route('login.index'))->with('success', 'Password reset successfully!');
     }
 
-    public function verifyCodeView()
-    {
-        return view('verify-code');
-    }
 }
