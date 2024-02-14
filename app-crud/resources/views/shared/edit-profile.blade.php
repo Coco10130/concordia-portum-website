@@ -97,7 +97,7 @@
                         <div class="col d-flex justify-content-center align-items-center">
                             <div class="input-group mb-2">
                                 @if (!$user->phoneNumber)
-                                    <input type="number" class="form-control" name="phoneNumber">
+                                    <input type="price_number" class="form-control" name="phoneNumber">
                                 @else
                                     <p class="user-name">{{ $user->phoneNumber }}</p>
                                 @endif
