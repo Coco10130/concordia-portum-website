@@ -11,6 +11,7 @@
     @yield('style')
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/cpLogo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Publico:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

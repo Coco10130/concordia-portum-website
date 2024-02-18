@@ -8,9 +8,12 @@
         <header class="fixed-top" style="padding: 8px 0px;">
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-3 d-flex align-items-center justify-content-end">
+                    <div class="col-4 d-flex align-items-center justify-content-center">
                         <a href="/products" style="text-decoration: none; color:#000000;">
-                            <h3 class="logo">Concordia Portum</h3>
+                            <div class="logo d-flex justify-content-center align-items-between">
+                                <img class="logo-img" src="/images/cpLogo.png" alt="Logo">
+                                <p class="logo-text mt-2">Concordia Portum</p>
+                            </div>
                         </a>
                     </div>
 
@@ -39,6 +42,15 @@
                                 <img src="/images/profiles/default-picture.png" alt="Profile" id="profileImage">
                             @endif
                         </a>
+
+                        <div class="logout">
+                            <form action="{{ route('logout.auth') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-light" style="border: 1px solid #0000">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

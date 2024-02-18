@@ -8,6 +8,7 @@
         rel="stylesheet" 
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
         crossorigin="anonymous">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/cpLogo.png">
     @yield('style')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Publico:wght@300;400;700&display=swap" rel="stylesheet">

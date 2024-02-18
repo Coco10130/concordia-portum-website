@@ -40,13 +40,22 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
+    public function checkOut(Request $request)
+    {
+        $checkedProductIds = $request->input('product_ids');
+
+        Cart::whereIn('product_id', $checkedProductIds)->delete();
+
+        return redirect()->route('cart.index')->with('success', 'Products already checked out!');
+    }
+
     public function removeItems(Request $request)
-{
-    $checkedProductIds = $request->input('product_ids');
+    {
+        $checkedProductIds = $request->input('product_ids');
+        
+        Cart::whereIn('product_id', $checkedProductIds)->delete();
 
-    Cart::whereIn('product_id', $checkedProductIds)->delete();
-
-    return redirect()->route('cart.index')->with('success', 'Products already checked out!');
+        // Trigger JavaScript function to update total values
+        return redirect()->route('cart.index')->with('success', 'Products removed from cart successfully!');
+    }
 }
-}
-

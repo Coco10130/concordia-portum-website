@@ -97,7 +97,12 @@
                         <div class="col d-flex justify-content-center align-items-center">
                             <div class="input-group mb-2">
                                 @if (!$user->phoneNumber)
-                                    <input type="price_number" class="form-control" name="phoneNumber">
+                                    <input type="price_number"
+                                        class="form-control @error('phoneNumber') is-invalid @enderror"
+                                        name="phoneNumber">
+                                    @error('phoneNumber')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 @else
                                     <p class="user-name">{{ $user->phoneNumber }}</p>
                                 @endif
@@ -110,11 +115,14 @@
                         @if (!$user->gender)
                             <div class="col-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" value="male"
-                                        id="male">
+                                    <input class="form-check-input @error('gender') is-invalid @enderror" type="radio"
+                                        name="gender" value="male" id="male">
                                     <label class="form-check-label" for="male">
                                         Male
                                     </label>
+                                    @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -135,8 +143,9 @@
                     <div class="row mt-3 mb-5">
                         <div class="col">
                             @if (!$user->birthDate)
-                                <input type="date" class="form-control @error('birthDay') is-invalid @enderror" id="birthday" name="birthDate">
-                                @error('confirm-password')
+                                <input type="date" class="form-control @error('birthDay') is-invalid @enderror"
+                                    id="birthday" name="birthDate" max="{{ date('Y-m-d') }}">
+                                @error('birthDay')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             @else

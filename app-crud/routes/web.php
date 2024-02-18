@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -21,11 +20,15 @@ use App\Http\Controllers\ForgotPasswordController;
 
 Route::redirect('/', '/login');
 
+Route::resource('/login', LoginController::class);
+
 Route::resource('/products', ProductsController::class);
 
-Route::resource('/register', RegisterController::class);
+Route::get('/register', [LoginController::class, 'registerView'])->name('register.view');
 
-Route::resource('/login', LoginController::class);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout.auth');
+
+Route::post('/register', [LoginController::class, 'register'])->name('register');
 
 Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('login.auth');
 
@@ -43,7 +46,7 @@ Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->n
 
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
-Route::post('/cart/remove-items', [CartController::class, 'removeItems'])->name('cart.remove-items');
+Route::post('/cart/check-out', [CartController::class, 'checkOut'])->name('cart.checkout');
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot.password.view');
 
@@ -52,3 +55,9 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswor
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
 
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
+
+Route::get('/products/{product}/edit', [ProductsController::class, 'editProduct'])->name('products.edit');
+
+Route::put('/products/{product}', [ProductsController::class, 'updateProduct'])->name('products.update');
+
+Route::delete('/products/{product}', [ProductsController::class, 'deleteProduct'])->name('products.destroy');

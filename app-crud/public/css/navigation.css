@@ -1,5 +1,5 @@
 header {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #74a12e;
     z-index: 99;
     position: fixed;
     width: 100%;
@@ -14,9 +14,18 @@ header .profile img {
     border-radius: 30px;
 }
 
-header .logo {
-    margin-top: 10px;
+header .logo-img {
+    height: 60px;
+    width: 60px;
+    /* background-image: url('/images/cpLogo.png');
+    background-size: cover;
+    background-position: center; */
+}
+
+header .logo-text {
+    margin-left: 30px;
     font-family: 'Kavoon', cursive;
+    font-size: 30px;
 }
 
 header .form-floating {

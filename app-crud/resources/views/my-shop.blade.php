@@ -70,34 +70,38 @@
                     </div>
                 @else
                     <p class="btn-holder mt-5 d-flex justify-content-center align-items-center"> <a href="/register-seller"
-                            class="btn btn-outline-secondary">Register as
-                            Seller</a></p>
+                            class="btn btn-outline-secondary">
+                            Register as Seller
+                        </a>
+                    </p>
                 @endif
 
-                
+
 
             </div>
         </div>
 
-        @if (isset($success))
-            <div class="alert alert-danger mt-4">{{ $success }}</div>
+        @if (session('success'))
+            <div class="alert alert-success text-center mt-4">
+                {{ session('success') }}
+            </div>
         @endif
     </div>
 
-    @if($user->is_seller)
-    <div class="container-fluid  d-flex justify-content-center align-items-center">
-        <div class="row  d-flex justify-content-center align-items-center">
-            <div class="col">
-                @if ($products->isEmpty())
-                        <div class="mt-4 col d-flex justify-content-center align-items-center">No products available</div>
+    @if ($user->is_seller)
+        <div class="container-fluid  d-flex justify-content-center align-items-center">
+            <div class="row  d-flex justify-content-center align-items-center">
+                <div class="col">
+                    @if ($products->isEmpty())
+                        <p class="mt-4 col d-flex justify-content-center align-items-center h4" style="margin-bottom: 100px;">No products available</p>
                     @else
                         @include('shared.products')
                         @error('productName')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     @endif
+                </div>
             </div>
         </div>
-    </div>
     @endif
 @endsection

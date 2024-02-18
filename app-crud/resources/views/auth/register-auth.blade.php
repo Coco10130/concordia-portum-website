@@ -1,4 +1,4 @@
-<form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Registration</h1>

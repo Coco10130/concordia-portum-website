@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="row upper-row pd-5 ">
-        <div class="col-2 product-col mt-3 d-flex align-items-center justify-content-center" style="padding: 30px 0px;">
+    <div class="row upper-row pd-5">
+        <div class="col-1 product-col mt-3 d-flex align-items-center justify-content-center" style="padding: 30px 0px;">
             <!-- Removed the check-all checkbox -->
         </div>
 
@@ -25,15 +25,19 @@
         <div class="col product-col mt-3 d-flex align-items-center justify-content-center">
             <p class="total-price h4">Total Price</p>
         </div>
+
+        <div class="col-1 product-col mt-3 d-flex align-items-center justify-content-center">
+
+        </div>
     </div>
 
-    <form method="POST" action="{{ route('cart.remove-items') }}">
+    <form method="POST" action="{{ route('cart.checkout') }}">
         @csrf
 
-        @if ($cartItems)
+        @if ($cartItems !== null && count($cartItems) > 0)
             @foreach ($cartItems as $index => $item)
                 <div class="row d-flex justify-content-center">
-                    <div class="col-2 product-col mt-2 d-flex align-items-center justify-content-center">
+                    <div class="col-1 product-col mt-2 d-flex align-items-center justify-content-center">
                         <div class="select mt-2">
                             <input class="form-check-input" type="checkbox" id="checkbox-{{ $index }}"
                                 name="product_ids[]" value="{{ $item->product_id }}" aria-label="...">
@@ -58,10 +62,20 @@
                     <div class="col-2 product-col mt-2 d-flex align-items-center justify-content-center">
                         <p class="total-price">₱ {{ number_format($item->product->price * $item->quantity, 2) }}</p>
                     </div>
+
+                    <div class="col-1 product-col mt-2 d-flex align-items-center justify-content-center">
+                        <!-- Each delete button is in its own form -->
+                        {{-- <form action="{{ route('cart.remove-items') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="product_ids[]" value="{{ $item->product_id }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form> --}}
+                    </div>
                 </div>
             @endforeach
         @else
-            <p>Your cart is empty.</p>
+            <p class="h4 text-center mt-4" style="font-family: 'Constantia', sans-serif;">Your cart is empty.</p>
         @endif
 
         <div class="row mt-3 mb-5">
@@ -101,31 +115,31 @@
 
 <script>
     function updateTotal() {
-    let subtotal = 0;
-    let totalItems = 0;
-    const checkboxes = document.querySelectorAll('.form-check-input:checked');
-    checkboxes.forEach(checkbox => {
-        const priceText = checkbox.closest('.row').querySelector('.product-price').textContent;
-        const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
-        const quantity = parseInt(checkbox.closest('.row').querySelector('.quantity-text').textContent);
-        subtotal += price * quantity;
-        totalItems += quantity;
-    });
+        let subtotal = 0;
+        let totalItems = 0;
+        const checkboxes = document.querySelectorAll('.form-check-input:checked');
+        checkboxes.forEach(checkbox => {
+            const priceText = checkbox.closest('.row').querySelector('.product-price').textContent;
+            const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+            const quantity = parseInt(checkbox.closest('.row').querySelector('.quantity-text').textContent);
+            subtotal += price * quantity;
+            totalItems += quantity;
+        });
 
-    const subtotalElement = document.getElementById('subtotal-value');
-    subtotalElement.textContent = formatCurrency(subtotal);
+        const subtotalElement = document.getElementById('subtotal-value');
+        subtotalElement.textContent = formatCurrency(subtotal);
 
-    const tax = subtotal * 0.05;
-    const taxElement = document.getElementById('tax-value');
-    taxElement.textContent = formatCurrency(tax);
+        const tax = subtotal * 0.05;
+        const taxElement = document.getElementById('tax-value');
+        taxElement.textContent = formatCurrency(tax);
 
-    const total = subtotal + tax;
-    const totalElement = document.getElementById('total-value');
-    totalElement.textContent = formatCurrency(total);
+        const total = subtotal + tax;
+        const totalElement = document.getElementById('total-value');
+        totalElement.textContent = formatCurrency(total);
 
-    const totalItemsElement = document.getElementById('total-items-value');
-    totalItemsElement.textContent = totalItems.toLocaleString();
-}
+        const totalItemsElement = document.getElementById('total-items-value');
+        totalItemsElement.textContent = totalItems.toLocaleString();
+    }
 
     function formatCurrency(amount) {
         return '₱' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
