@@ -24,8 +24,6 @@ Route::redirect('/', '/products');
 
 Route::resource('/login', LoginController::class);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-
 Route::resource('/products', ProductsController::class);
 
 Route::get('/register', [LoginController::class, 'registerView'])->name('register.view');

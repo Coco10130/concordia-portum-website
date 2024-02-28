@@ -23,7 +23,7 @@ class CartController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Please log in to add products to cart.');
+            return redirect()->route('login.index')->with('error', 'Please log in to add products to cart.');
         }
 
         $product = Product::findOrFail($productId);

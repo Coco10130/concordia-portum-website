@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-class ForgotPasswordController extends Controller
+class ForgotPassController extends Controller
 {
     public function forgotPassword(Request $request)
     {
@@ -26,7 +26,14 @@ class ForgotPasswordController extends Controller
             'created_at' => now(),
         ]);
 
-        Mail::to($request->email)->send(new ResetPasswordMail($token));
+        $emailContent = "You are receiving this email because we received a password reset request for your account.\n";
+        $emailContent .= "Your password reset token is: " . $token . "\n";
+        $emailContent .= "If you did not request a password reset, no further action is required.";
+
+        Mail::raw($emailContent, function ($message) use ($request) {
+            $message->to($request->email)
+                ->subject('Reset Password');
+        });
 
         return response()->json(['message' => 'We have sent an email to reset your password'], 200);
     }
