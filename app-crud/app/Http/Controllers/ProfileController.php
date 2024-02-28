@@ -89,6 +89,13 @@ class ProfileController extends Controller
             'shop_phone_number' => 'required|size:11',
         ]);
 
+        if (!filter_var($validated['email'], FILTER_VALIDATE_EMAIL) || !preg_match('\.up/@phinmaed\.com$/', $validated['email'])) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['email' => 'Only valid Phinmaed accounts are allowed to register.']);
+        }
+
         $user = auth()->user();
         $user->is_seller = true;
         $user->save();

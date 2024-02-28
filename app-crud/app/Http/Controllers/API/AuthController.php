@@ -30,6 +30,13 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
+        if (!filter_var($validated['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@gmail\.com$/', $validated['email'])) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['email' => 'Only valid Gmail accounts are allowed to register.']);
+        }
+
         $user = User::create([
             'userName' => $validatedData['userName'],
             'email' => $validatedData['email'],

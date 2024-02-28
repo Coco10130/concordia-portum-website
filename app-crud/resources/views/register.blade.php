@@ -18,7 +18,7 @@
         <div class="card w-50 mx-auto p-4">
             @include('auth.register-auth')
             <div class="text-center mt-3">
-                <a href="/login" style="text-decoration: none; color: #000000;">Login Here</a>
+                <a href="/login" style="text-decoration: none; color: #ffffff;">Login Here</a>
             </div>
         </div>
     </div>

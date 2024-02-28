@@ -1,7 +1,7 @@
 <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
-    <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Registration</h1>
+    <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive; color: #ffffff;">Registration</h1>
 
     <div class="row">
         <div class="col">
@@ -53,7 +53,7 @@
     </div>
 
     <div class="form-floating d-flex justify-content-center">
-        <input type="submit" name="submit" class="btn btn-outline-secondary" value="Register">
+        <input type="submit" name="submit" class="btn btn-outline-light" value="Register">
         <label for="remember-me" class="text-dark"></label><br>
     </div>
 </form>

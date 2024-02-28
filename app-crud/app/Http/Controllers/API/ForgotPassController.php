@@ -26,13 +26,9 @@ class ForgotPassController extends Controller
             'created_at' => now(),
         ]);
 
-        $emailContent = "You are receiving this email because we received a password reset request for your account.\n";
-        $emailContent .= "Your password reset token is: " . $token . "\n";
-        $emailContent .= "If you did not request a password reset, no further action is required.";
-
-        Mail::raw($emailContent, function ($message) use ($request) {
-            $message->to($request->email)
-                ->subject('Reset Password');
+        $Mail::send('emails.forgot-password', ['token' => $token], function($message) use ($request){
+            $message->to($request->email);
+            $message->subject('Reset Password');
         });
 
         return response()->json(['message' => 'We have sent an email to reset your password'], 200);

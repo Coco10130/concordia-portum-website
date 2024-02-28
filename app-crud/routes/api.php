@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ForgotPassController;
+use App\Http\Controllers\API\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
+
+Route::get('/showProducts', [ProductController::class, 'index']);
+Route::post('/addProducts', [ProductController::class, 'store']);
+Route::delete('/deleteProducts/{id}', [ProductController::class, 'deleteProduct']);
