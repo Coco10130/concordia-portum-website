@@ -20,7 +20,7 @@
             @include('auth.login-auth')
 
             <div class="text-center mt-3">
-                <a href="{{ route('register.view') }}" style="text-decoration: none; color: #000000;">Register Here</a>
+                <a href="{{ route('register.view') }}" style="text-decoration: none; color: #ffffff;">Register Here</a>
             </div>
         </div>
     </div>

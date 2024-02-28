@@ -21,10 +21,8 @@ class LoginController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        if (auth()->attempt($validated))
-        {
-            return redirect()
-                ->route('products.index');
+        if (auth()->attempt($validated)) {
+            return redirect()->route('products.index');
         } else {
             $message = 'Invalid credentials. Please try again.';
             return view('login', compact('message'));
@@ -39,12 +37,18 @@ class LoginController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-        if (!Str::endsWith($validated['email'], '.up@phinmaed.com')) {
-            return redirect()->back()->withInput()->withErrors(['email' => 'Only PHINMAED accounts are allowed to register']);
+        if (!filter_var($validated['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@gmail\.com$/', $validated['email'])) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['email' => 'Only valid Gmail accounts are allowed to register.']);
         }
-    
+
         if (User::where('email', $validated['email'])->exists()) {
-            return redirect()->back()->withInput()->withErrors(['email' => 'Email already exists.']);
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['email' => 'Email already exists.']);
         }
 
         User::create([
@@ -53,8 +57,7 @@ class LoginController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()
-            ->route('login.index')->with('success', 'Account has been created');
+        return redirect()->route('login.index')->with('success', 'Account has been created');
     }
 
     public function registerView()
@@ -62,7 +65,8 @@ class LoginController extends Controller
         return view('register');
     }
 
-    public function logout() {
+    public function logout()
+    {
         auth()->logout();
 
         request()->session()->invalidate();
@@ -71,4 +75,3 @@ class LoginController extends Controller
         return redirect()->route('login.index');
     }
 }
-

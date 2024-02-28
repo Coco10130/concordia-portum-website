@@ -7,13 +7,15 @@ use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+        $cartItemsCount = $user ? Cart::where('user_id', $user->id)->count() : 0;
+        
         $products = Product::all();
 
         return view('dashboard', compact('cartItemsCount', 'products', 'user'));
@@ -49,9 +51,13 @@ class ProductsController extends Controller
 
     public function addToCart(Request $request, $productId)
     {
-        $product = Product::findOrFail($productId);
+        $user = Auth::user();
 
-        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to cart.');
+        }
+
+        $product = Product::findOrFail($productId);
 
         $cart = $request->session()->get('cart', []);
 

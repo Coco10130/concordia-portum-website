@@ -64,13 +64,6 @@
                     </div>
 
                     <div class="col-1 product-col mt-2 d-flex align-items-center justify-content-center">
-                        <!-- Each delete button is in its own form -->
-                        {{-- <form action="{{ route('cart.remove-items') }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="product_ids[]" value="{{ $item->product_id }}">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form> --}}
                     </div>
                 </div>
             @endforeach

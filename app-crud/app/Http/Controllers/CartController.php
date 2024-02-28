@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -19,23 +20,28 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $productId)
     {
-        $product = Product::findOrFail($productId);
-        $user = auth()->user();
+        $user = Auth::user();
 
-        $cartItem = Cart::where('user_id', $user->id)
-            ->where('product_id', $productId)
-            ->first();
-
-        if ($cartItem) {
-            $cartItem->quantity++;
-            $cartItem->save();
-        } else {
-            Cart::create([
-                'user_id' => $user->id,
-                'product_id' => $productId,
-                'quantity' => 1,
-            ]);
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to cart.');
         }
+
+        $product = Product::findOrFail($productId);
+
+        $cart = $request->session()->get('cart', []);
+
+        if (isset($cart[$user->id][$productId])) {
+            $cart[$user->id][$productId]['quantity']++;
+        } else {
+            $cart[$user->id][$productId] = [
+                'name' => $product->product_name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => 1,
+            ];
+        }
+
+        $request->session()->put('cart', $cart);
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
@@ -52,7 +58,7 @@ class CartController extends Controller
     public function removeItems(Request $request)
     {
         $checkedProductIds = $request->input('product_ids');
-        
+
         Cart::whereIn('product_id', $checkedProductIds)->delete();
 
         // Trigger JavaScript function to update total values

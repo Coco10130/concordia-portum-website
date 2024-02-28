@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ForgotPasswordController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,12 @@ use App\Http\Controllers\ForgotPasswordController;
 |
 */
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/products');
+
 
 Route::resource('/login', LoginController::class);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::resource('/products', ProductsController::class);
 

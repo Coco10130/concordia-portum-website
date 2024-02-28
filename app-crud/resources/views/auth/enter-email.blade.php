@@ -9,8 +9,11 @@
     <div class="row">
         <div class="col">
             <div class="form-floating mb-3 text-center">
-                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="floatingEmail" placeholder=" " name="email">
                 <label class="form-label-custom" for="floatingEmail">Email Address</label>
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     </div>

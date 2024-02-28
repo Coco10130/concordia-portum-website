@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <label for="price">Price:</label>
-        <input type="price_number" id="price" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Price" required>
+        <input type="number" id="price" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Price" min="0" required>
         @error('price')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror

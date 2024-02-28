@@ -49,7 +49,7 @@ class ProfileController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            $path = 'images/profiles/';
+            $path = 'images/';
 
             if (!$file->move(public_path($path), $fileName)) {
                 return redirect()->back()->with('error', 'Failed to move the uploaded image file.');

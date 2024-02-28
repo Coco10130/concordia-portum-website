@@ -12,7 +12,6 @@
                         <a href="/products" style="text-decoration: none; color:#000000;">
                             <div class="logo d-flex justify-content-center align-items-between">
                                 <img class="logo-img" src="/images/cpLogo.png" alt="Logo">
-                                <p class="logo-text mt-2">Concordia Portum</p>
                             </div>
                         </a>
                     </div>
@@ -28,29 +27,36 @@
                     </div>
 
                     <div class="col-3 d-flex align-items-center justify-content-center">
-                        <a class="cart" href="/cart">
-                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px; color: #000000;">
-                                <span id="cartItemCount" class="badge bg-danger"
-                                    style="font-size: 11px;">{{ $cartItemsCount }}</span>
-                            </i>
-                        </a>
+                        @if(auth()->check())
+                            <a class="cart" href="/cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px; color: #000000;">
+                                    <span id="cartItemCount" class="badge bg-danger"
+                                        style="font-size: 11px;">{{ $cartItemsCount }}</span>
+                                </i>
+                            </a>
 
-                        <a class="profile" href="/profile" class="profile">
-                            @if ($user->image)
-                                <img src="{{ asset($user->image) }}" alt="Profile" id="profileImage">
-                            @else
-                                <img src="/images/profiles/default-picture.png" alt="Profile" id="profileImage">
-                            @endif
-                        </a>
+                            <a class="profile" href="/profile" class="profile">
+                                @if ($user->image)
+                                    <img src="{{ asset($user->image) }}" alt="Profile" id="profileImage">
+                                @else
+                                    <img src="/images/default-picture.png" alt="Profile" id="profileImage">
+                                @endif
+                            </a>
 
-                        <div class="logout">
-                            <form action="{{ route('logout.auth') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-light" style="border: 1px solid #0000">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </div>
+                            <div class="logout">
+                                <form action="{{ route('logout.auth') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-light" style="border: 1px solid #0000">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        @else
+                            <div>
+                                <a href="/login" class="btn btn-light">Login</a>
+                                <a href="/register" class="btn btn-light">Register</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
