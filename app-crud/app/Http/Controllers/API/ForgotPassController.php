@@ -26,7 +26,7 @@ class ForgotPassController extends Controller
             'created_at' => now(),
         ]);
 
-        $Mail::send('emails.forgot-password', ['token' => $token], function($message) use ($request){
+        Mail::send('emails.forgot-password', ['token' => $token], function($message) use ($request){
             $message->to($request->email);
             $message->subject('Reset Password');
         });

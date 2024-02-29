@@ -27,9 +27,10 @@
                     </div>
 
                     <div class="col-3 d-flex align-items-center justify-content-center">
-                        @if(auth()->check())
+                        @if (auth()->user())
                             <a class="cart" href="/cart">
-                                <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px; color: #000000;">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"
+                                    style="font-size: 30px; color: #000000;">
                                     <span id="cartItemCount" class="badge bg-danger"
                                         style="font-size: 11px;">{{ $cartItemsCount }}</span>
                                 </i>
@@ -57,10 +58,10 @@
                                 <a href="/register" class="btn btn-light">Register</a>
                             </div>
                         @endif
+
                     </div>
                 </div>
             </div>
         </header>
     </div>
 </div>
-

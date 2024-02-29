@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProductController extends Controller
 {
@@ -26,11 +27,17 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized. Please log in.'], 401);
+        }
+
         $request->validate([
-            'image' => 'image',
+            'image' => 'required|image',
             'product_name' => 'required|string|unique:products,product_name',
             'price' => 'required|numeric',
         ]);
+        
+        $user = auth()->user();
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -43,7 +50,7 @@ class ProductController extends Controller
         $product->image = $path . $filename;
         $product->product_name = $request->product_name;
         $product->price = $request->price;
-        $product->user_id = auth()->user()->id;
+        $product->user_id = $user->id;
         $product->save();
 
         return response()->json(['message' => 'Product added successfully']);
@@ -51,14 +58,17 @@ class ProductController extends Controller
 
     public function addToCart(Request $request, $productId)
     {
-        $user = Auth::user();
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized access. Please provide a valid token.'], 401);
+        }
+
+        $user = User::where('token', Hash::make($request->bearerToken()))->first();
 
         if (!$user) {
-            return response()->json(['error' => 'Please log in to add products to cart.'], 401);
+            return response()->json(['error' => 'Invalid token. Please log in again.'], 401);
         }
 
         $product = Product::findOrFail($productId);
-
         $cart = $request->session()->get('cart', []);
 
         if (isset($cart[$user->id][$productId])) {

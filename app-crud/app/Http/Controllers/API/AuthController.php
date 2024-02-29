@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
+
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -16,6 +19,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
             return response()->json(['user' => $user]);
         } else {
             return response()->json(['error' => 'Invalid credentials'], 401);
@@ -30,7 +34,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-        if (!filter_var($validated['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@gmail\.com$/', $validated['email'])) {
+        if (!filter_var($validatedData['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@gmail\.com$/', $validatedData['email'])) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -51,4 +55,5 @@ class AuthController extends Controller
         Auth::logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
+    
 }

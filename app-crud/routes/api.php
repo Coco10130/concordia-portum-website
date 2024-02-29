@@ -28,5 +28,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
 
 Route::get('/showProducts', [ProductController::class, 'index']);
-Route::post('/addProducts', [ProductController::class, 'store']);
-Route::delete('/deleteProducts/{id}', [ProductController::class, 'deleteProduct']);
+Route::post('/addProduct', [ProductController::class, 'store']);
+Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
+Route::post('/addToCart/{productId}', [ProductController::class, 'addToCart']);
