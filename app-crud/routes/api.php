@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ForgotPassController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/registerSeller', [AuthController::class, 'registerSeller']);
+});
+
 Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
 
 Route::get('/showProducts', [ProductController::class, 'index']);
 Route::post('/addProduct', [ProductController::class, 'store']);
 Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
 Route::post('/addToCart/{productId}', [ProductController::class, 'addToCart']);
+
+Route::post('/updateProfile', [ProfileController::class], 'updateProfile');
+

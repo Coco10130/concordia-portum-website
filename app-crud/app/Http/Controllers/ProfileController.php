@@ -49,7 +49,7 @@ class ProfileController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            $path = 'images/';
+            $path = '/images/';
 
             if (!$file->move(public_path($path), $fileName)) {
                 return redirect()->back()->with('error', 'Failed to move the uploaded image file.');
@@ -89,7 +89,7 @@ class ProfileController extends Controller
             'shop_phone_number' => 'required|size:11',
         ]);
 
-        if (!filter_var($validated['email'], FILTER_VALIDATE_EMAIL) || !preg_match('\.up/@phinmaed\.com$/', $validated['email'])) {
+        if (!filter_var($validated['shop_email'], FILTER_VALIDATE_EMAIL) || !preg_match('/\.up@phinmaed\.com$/', $validated['shop_email'])) {
             return redirect()
                 ->back()
                 ->withInput()

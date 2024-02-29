@@ -1,13 +1,14 @@
 body {
-    background-color: rgb(151,243,110);
-    background: linear-gradient(75deg, rgba(151,243,110,1)0%,rgba(24,141,6,1)100%);
+    background: url('/images/BG1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .card {
-    background-color: #d0dfc1;
+    background-color: rgba(254, 254, 254, 0);
     padding: 23px 50px;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    border: none;
 }
 
 .form-label-custom {

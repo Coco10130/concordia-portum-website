@@ -36,7 +36,7 @@ Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('logi
 
 Route::resource('profile', ProfileController::class);
 
-Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.updateProfile');
 
 Route::get('/my-shop', [ProfileController::class, 'myShop'])->name('myShop');
 

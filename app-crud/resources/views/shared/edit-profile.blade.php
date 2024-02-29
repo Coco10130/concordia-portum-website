@@ -1,4 +1,4 @@
-<form action="{{ route('profile.update', ['profile' => Auth::id()]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('profile.updateProfile', ['profile' => Auth::id()]) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="container-fluid placeholders">

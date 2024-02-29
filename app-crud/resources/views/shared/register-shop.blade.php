@@ -1,8 +1,8 @@
 <form action="{{ route('registerSeller') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
-    <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive;">Shop Information</h1>
-    <p>Please enter your details about your Shop.</p>
+    <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive; color: #ffffff;">Shop Information</h1>
+    <p style="color: #ffffff;">Please enter your details about your Shop.</p>
 
     <div class="row">
         <div class="col">
