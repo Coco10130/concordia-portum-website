@@ -14,8 +14,12 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $cartItems = Cart::where('user_id', $user->id)->get();
-        $cartItemsCount = $cartItems->count();
+        $cartItemsCount = 0;
+
+        if ($user) {
+            $cartItems = Cart::where('user_id', $user->id)->get();
+            $cartItemsCount = $cartItems->count();
+        }
 
         $category = $request->query('category');
         $products = Product::query();

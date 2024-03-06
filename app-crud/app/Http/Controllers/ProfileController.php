@@ -107,15 +107,14 @@ class ProfileController extends Controller
     {
         $validated = $request->validate([
             'shop_name' => 'required',
-            'shop_email' => 'required|email|unique:sellers,shop_email',
+            'shop_email' => ['required', 'email:rfc', 'unique:sellers,shop_email', 'regex:/\.up@phinmaed\.com$/i'],
             'shop_phone_number' => ['required', 'size:11', 'regex:/^09/'],
         ]);
 
-        if (!filter_var($validated['shop_email'], FILTER_VALIDATE_EMAIL) || !preg_match('/\.up\@phinmaed\.com$/', $validated['shop_email'])) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['email' => 'Only valid Phinmaed accounts are allowed to register.']);
+        $validator = Validator::make($request->all(), $rules, $customErrorMessages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $user = auth()->user();

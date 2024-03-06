@@ -32,7 +32,7 @@
     </div>
 
     @if ($user->is_seller)
-        <div class="container-fluid d-flex justify-content-center align-items-center"  {{-- style="margin-top: 10vh;" --}}>
+        <div class="container-fluid d-flex justify-content-center align-items-center">
             <div class="row  d-flex justify-content-center align-items-center">
                 <div class="col">
                     @if ($products->isEmpty())

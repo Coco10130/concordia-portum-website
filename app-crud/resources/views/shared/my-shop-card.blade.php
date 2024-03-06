@@ -43,8 +43,8 @@
             </div>
         </div>
 
-        <div class="row-mt5">
-            <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center" >
                 @include('shared.create')
             </div>
         </div>
@@ -55,7 +55,4 @@
             </a>
         </p>
     @endif
-
-
-
 </div>

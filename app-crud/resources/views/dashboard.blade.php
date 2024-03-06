@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2 navigation d-flex justify-content-center align-items-center" style="margin-top: 10vh;">
+        <div class="col-2 navigation d-flex justify-content-center align-items-center" style="height: 50vh; margin-top: 10vh;">
             <!-- navigation.blade.php -->
 
             @include('shared.category-nav')

@@ -25,7 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->get('/user', [AuthController::class, 'user']);
 
 Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
 
@@ -43,3 +44,32 @@ Route::post('/addToCart', [CartController::class, 'addToCart']);
 Route::post('/checkOut', [CartController::class, 'checkOut']);
 Route::get('/checkOutView', [CartController::class, 'checkOutView']);
 Route::post('/checkOutView', [CartController::class, 'checkOutView']);
+
+/* Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/showProducts', [ProductController::class, 'index']);
+    Route::post('/addProduct', [ProductController::class, 'store']);
+    Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
+    Route::post('/addToCart/{productId}', [ProductController::class, 'addToCart']);
+
+    Route::post('/updateProfile', [ProfileController::class, 'updateProfile']);
+    Route::post('/registerSeller', [ProfileController::class, 'registerSeller']);
+    Route::get('/showProfile', [ProfileController::class, 'showProfile']);
+    Route::get('/myPurchase', [ProfileController::class, 'purchaseView']);
+
+    Route::post('/addToCart', [CartController::class, 'addToCart']);
+    Route::post('/checkOut', [CartController::class, 'checkOut']);
+    Route::get('/checkOutView', [CartController::class, 'checkOutView']);
+    Route::post('/checkOutView', [CartController::class, 'checkOutView']);
+}); */

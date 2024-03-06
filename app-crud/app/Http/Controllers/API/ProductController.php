@@ -15,17 +15,28 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $cartItems = Cart::where('user_id', $user->id)->get();
-        $cartItemsCount = $cartItems->count();
+        $cartItemsCount = 0;
 
-        $category = $request->query('category');
-        $productsQuery = Product::query();
-
-        if ($category) {
-            $productsQuery->where('category', $category);
+        if ($user) {
+            $cartItems = Cart::where('user_id', $user->id)->get();
+            $cartItemsCount = $cartItems->count();
         }
 
-        $products = $productsQuery->get();
+        $category = $request->query('category');
+        $products = Product::query();
+
+        if ($category) {
+            $products->where('category', $category);
+        }
+
+        $products = $products->get();
+        $productsWithShopName = [];
+        foreach ($products as $product) {
+            $shop_name = $product->seller->shop_name;
+            $productData = $product->toArray();
+            $productData['shop_name'] = $shop_name;
+            $productsWithShopName[] = $productData;
+        }
 
         return response()->json([
             'category' => $category,
