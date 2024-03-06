@@ -11,14 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $cartItemsCount = $user ? Cart::where('user_id', $user->id)->count() : 0;
-        
-        $products = Product::all();
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItemsCount = $cartItems->count();
 
-        return view('dashboard', compact('cartItemsCount', 'products', 'user'));
+        $category = $request->query('category');
+        $products = Product::query();
+
+        if ($category) {
+            $products->where('category', $category);
+        }
+
+        $products = $products->get();
+
+        return view('dashboard', compact('category', 'products', 'cartItemsCount', 'user'));
     }
 
     public function store(Request $request)
@@ -27,6 +35,8 @@ class ProductsController extends Controller
             'image' => 'required|image',
             'product_name' => 'required|string|unique:products,product_name',
             'price' => 'required|numeric',
+            'quantity' => 'required|numeric|min:1',
+            'category' => 'required',
         ]);
 
         if ($request->has('image')) {
@@ -42,7 +52,9 @@ class ProductsController extends Controller
         $product = new Product();
         $product->image = $path . $filename;
         $product->product_name = $request->product_name;
+        $product->category = $request->category;
         $product->price = $request->price;
+        $product->quantity = $request->quantity;
         $product->user_id = auth()->user()->id;
         $product->save();
 
@@ -68,7 +80,7 @@ class ProductsController extends Controller
                 'name' => $product->product_name,
                 'price' => $product->price,
                 'image' => $product->image,
-                'quantity' => 1,
+                'quantity' => $product->quantity,
             ];
         }
 

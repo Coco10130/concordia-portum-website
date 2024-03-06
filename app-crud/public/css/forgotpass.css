@@ -1,13 +1,48 @@
 body {
-    background-color: rgb(151,243,110);
-    background: linear-gradient(75deg, rgba(151,243,110,1)0%,rgba(24,141,6,1)100%);
+    background: url('/images/BG1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: 15vh;
+    background-color: rgba(254, 254, 254, 0);
     padding: 23px 50px;
-    border-radius: 10px;
+    border-radius: 20px;
+    margin-left: 95vh;
+    border: 2px solid #ffffff;
+}
+
+.row .top-nav img {
+    margin-right: 15px;
+    margin-left: 7vh;
+    height: 60px;
+    width: 150px;
+}
+
+.row .top-nav .login-text {
+    margin-left: 15px;
+}
+
+.text,
+.login-text {
+    font-family: 'oswald';
+}
+
+.row .top-nav {
+    padding-left: 30px;
+    padding-top: 30px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255);
     backdrop-filter: blur(10px);
+}
+
+.row .top-nav .border {
+    margin-bottom: 20px;
+    height: 70px;
+    border-radius: 30px;
+    border: 2px solid rgb(255, 255, 255);
 }
 
 .form-label-custom {

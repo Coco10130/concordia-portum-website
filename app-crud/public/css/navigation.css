@@ -1,5 +1,5 @@
 header {
-    background-color:#b2beb500;
+    background-color: rgba(208, 208, 208, 0);
     z-index: 99;
     position: fixed;
     width: 100%;
@@ -41,4 +41,16 @@ footer {
     z-index: 99;
     width: 100%;
     backdrop-filter: blur(500px);
+}
+
+.outer-container {
+    flex-grow: 1; /* Make the container grow to fill the remaining space */
+}
+
+.bottom {
+    background-color: #f8f9fa;
+    height: 60px; /* Adjust the height according to your design */
+    width: 100%;
+    position: relative;
+    bottom: 0;
 }

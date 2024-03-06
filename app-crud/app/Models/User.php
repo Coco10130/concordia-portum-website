@@ -18,15 +18,21 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = ['userName', 'name', 'email', 'password', 'image', 'phoneNumber', 'gender', 'birthDate', 'is_seller'];
+    protected $fillable = ['userName', 'name', 'email', 'password', 'image', 'phoneNumber', 'gender', 'birthDate', 'is_seller', 'address'];
 
     public function seller()
     {
         return $this->hasOne(Seller::class);
     }
 
-    public function cart() {
+    public function cart()
+    {
         return $this->hasMany(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     /**

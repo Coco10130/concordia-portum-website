@@ -12,16 +12,26 @@ use Illuminate\Support\Facades\Hash;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $cartItemsCount = $user ? Cart::where('user_id', $user->id)->count() : 0;
-        $products = Product::all();
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItemsCount = $cartItems->count();
+
+        $category = $request->query('category');
+        $productsQuery = Product::query();
+
+        if ($category) {
+            $productsQuery->where('category', $category);
+        }
+
+        $products = $productsQuery->get();
 
         return response()->json([
-            'user' => $user,
-            'cartItemsCount' => $cartItemsCount,
+            'category' => $category,
             'products' => $products,
+            'cartItemsCount' => $cartItemsCount,
+            'user' => $user
         ]);
     }
 

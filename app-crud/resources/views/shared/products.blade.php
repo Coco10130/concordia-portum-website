@@ -14,6 +14,7 @@
                             <img src="{{ asset($product->image) }}" class="card-img-top"
                                 alt="Product Image">
                             <div class="card-body">
+                                <p class="price">{{ $product->seller->shop_name }}</p>
                                 <h5 class="card-title product-name">{{ $product->product_name }}</h5>
                                 <h6 class="price">₱{{ number_format($product->price, 2) }}</h6>
                                 <div class="btn-group mt-3" role="group" aria-label="Product Actions">

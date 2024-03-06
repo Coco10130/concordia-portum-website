@@ -11,22 +11,24 @@
     @yield('style')
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/navigation.css">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/cpLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fav-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Publico:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    <div class="container-fluid outer-container">
+    <div class="container-fluid outer-container flex-grow-1">
         @include('layouts.nav')
         {{-- content here --}}
-
         
         @yield('content')
 
-        <footer class="fixed-bottom d-flex justify-content-center align-items-center">
+        <footer class="bottom d-flex justify-content-center align-items-center">
             <p>Concordia Portum</p>
         </footer>
     </div>

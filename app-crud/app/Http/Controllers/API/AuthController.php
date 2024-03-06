@@ -35,7 +35,10 @@ class AuthController extends Controller
         ]);
 
         if (!filter_var($validatedData['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@gmail\.com$/', $validatedData['email'])) {
-            return response()->json(['error' => 'Only valid Gmail accounts are allowed to register.'], 422);
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['email' => 'Only valid Gmail accounts are allowed to register.']);
         }
 
         $user = User::create([
@@ -44,7 +47,7 @@ class AuthController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        return response()->json(['user' => $user], 201);
+        return response()->json(['user' => $user]);
     }
 
     public function logout()
@@ -52,32 +55,5 @@ class AuthController extends Controller
         Auth::logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
-
-    public function registerSeller(Request $request)
-    {
-        $validated = $request->validate([
-            'shop_name' => 'required',
-            'shop_email' => 'required|email|unique:sellers,shop_email',
-            'shop_phone_number' => 'required|digits:11',
-        ]);
-
-        if (!filter_var($validated['shop_email'], FILTER_VALIDATE_EMAIL) || !preg_match('/\.up@phinmaed\.com$/', $validated['shop_email'])) {
-            return response()->json(['error' => 'Only valid Phinmaed accounts are allowed to register.'], 422);
-        }
-
-        $user = auth()->user();
-        $user->is_seller = true;
-        $user->save();
-
-        $user->seller()->updateOrCreate(
-            [],
-            [
-                'shop_name' => $validated['shop_name'],
-                'shop_email' => $validated['shop_email'],
-                'shop_phone_number' => $validated['shop_phone_number'],
-            ],
-        );
-
-        return response()->json(['message' => 'You have become a seller!'], 200);
-    }
+    
 }

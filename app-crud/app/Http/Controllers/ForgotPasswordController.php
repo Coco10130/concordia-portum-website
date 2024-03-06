@@ -45,33 +45,37 @@ class ForgotPasswordController extends Controller
     }
 
     public function resetPasswordPost(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required|confirmed|string|min:8',
-            'password_confirmation' => 'required',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|email|exists:users',
+        'password' => 'required|confirmed|string|min:8',
+        'password_confirmation' => 'required',
+    ]);
 
-        $updatePassword = DB::table('password_resets')
-            ->where([
-                'email' => $request->email,
-                'token' => $request->token,
-            ])
-            ->first();
+    $updatePassword = DB::table('password_resets')
+        ->where([
+            'email' => $request->email,
+            'token' => $request->token,
+        ])
+        ->first();
 
-            
-
-        if (!$updatePassword) {
-            return redirect()->to(route('reset.password'))->with('error', 'Invalid');
-        }
-
-        User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
-
-        DB::table('password_resets')
-            ->where('email', $request->email)
-            ->delete();
-
-        return redirect()->to(route('login.index'))->with('success', 'Password reset successfully!');
+    if (!$updatePassword) {
+        return redirect()->to(route('reset.password'))->with('error', 'Invalid');
     }
+
+    $user = User::where('email', $request->email)->first();
+
+    if (Hash::check($request->password, $user->password)) {
+        return redirect()->back()->withInput()->withErrors(['password' => 'New password must be different from the old password']);
+    }
+
+    User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+
+    DB::table('password_resets')
+        ->where('email', $request->email)
+        ->delete();
+
+    return redirect()->to(route('login.index'))->with('success', 'Password reset successfully!');
+}
 
 }

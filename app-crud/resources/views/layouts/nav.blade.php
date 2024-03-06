@@ -17,13 +17,13 @@
                     </div>
 
                     <div class="col-4">
-                        <div class="mx-auto">
+                        {{-- <div class="mx-auto">
                             <div class="form-floating">
                                 <input type="text" class="form-control form-control-sm" id="search"
                                     placeholder="Search">
                                 <label for="search">Search</label>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="col-3 d-flex align-items-center justify-content-center">

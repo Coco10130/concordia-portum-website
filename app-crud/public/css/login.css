@@ -5,10 +5,43 @@ body {
 }
 
 .card {
+    margin-top: 7vh;
     background-color: rgba(254, 254, 254, 0);
     padding: 23px 50px;
-    border-radius: 10px;
-    border: none;
+    border-radius: 20px;
+    margin-left: 95vh;
+    border: 2px solid #ffffff;
+}
+
+.row .top-nav img {
+    margin-right: 15px;
+    margin-left: 7vh;
+    height: 60px;
+    width: 150px;
+}
+
+.row .top-nav .login-text {
+    margin-left: 15px;
+}
+
+.text,
+.login-text {
+    font-family: 'oswald';
+}
+
+.row .top-nav {
+    padding-left: 30px;
+    padding-top: 30px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255);
+    backdrop-filter: blur(10px);
+}
+
+.row .top-nav .border {
+    margin-bottom: 20px;
+    height: 70px;
+    border-radius: 30px;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .form-floating #floatingInput {
@@ -26,7 +59,6 @@ body {
     border-radius: 20px;
     padding-left: 36px !important;
 }
-
 .form-floating #floatingInput,
 .form-floating #floatingPassword {
     background-position: left 10px center;
@@ -44,34 +76,32 @@ body {
     font-family: 'Constantia', sans-serif;
 }
 
-/* Responsive styles for mobile devices */
 @media only screen and (max-width: 600px) {
-    /* Adjust styles for screens up to 600px wide (typical mobile devices) */
 
     .container-fluid {
-        padding: 10px 0px; /* Adjust padding for smaller screens */
+        padding: 10px 0px;
     }
 
     .card {
-        width: 80%; /* Make the card width 80% of the container for smaller screens */
-        padding: 15px; /* Adjust padding for smaller screens */
+        width: 80%;
+        padding: 15px;
     }
 
     .form-floating #floatingInput,
     .form-floating #floatingPassword {
-        background-size: 12px; /* Adjust background size for smaller screens */
-        padding-left: 26px !important; /* Adjust padding for smaller screens */
+        background-size: 12px;
+        padding-left: 26px !important;
     }
 
     .form-floating label {
-        margin-left: 12px; /* Adjust margin for smaller screens */
+        margin-left: 12px;
     }
 
     .btn {
-        width: 80px; /* Adjust button width for smaller screens */
+        width: 80px;
     }
 
     .form-label-custom {
-        font-size: 14px; /* Adjust font size for smaller screens */
+        font-size: 14px;
     }
 }

@@ -20,11 +20,11 @@
 
     <div class="d-flex justify-content-end">
         <a href="/login">
-            <button type="button" class="btn btn-outline-secondary"
-                style="color: #000000; text-decoration: none;">Cancel</button>
+            <button type="button" class="btn text btn-outline-secondary"
+                style="color: #fffbfb; text-decoration: none;">Cancel</button>
         </a>
         <div style="margin-left: 10px;"></div>
-        <input type="submit" class="btn btn-outline-secondary" value="Send Verification Code" name="submit">
+        <input type="submit" class="btn text btn-outline-light" value="Send Verification Code" name="submit">
         <label for="remember-me" class="text-dark"></label>
     </div>
 </form>

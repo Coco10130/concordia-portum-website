@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seller;
 use App\Models\Product;
+use App\Models\Order;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,12 +35,29 @@ class ProfileController extends Controller
         return view('my-shop-register');
     }
 
+    public function purchaseView()
+    {
+        $user = Auth::user();
+        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+
+        $orders = Order::where('user_id', $user->id)
+            ->with([
+                'product' => function ($query) {
+                    $query->with('seller');
+                },
+            ])
+            ->get();
+
+        return view('my-purchases', compact('cartItemsCount', 'user', 'orders'));
+    }
+
     public function update(Request $request)
     {
         $validated = $request->validate([
             'gender' => 'nullable|in:male,female',
-            'phoneNumber' => 'nullable|size:11',
+            'phoneNumber' => ['nullable', 'size:11', 'regex:/^09/'],
             'birthDate' => 'nullable',
+            'address' => 'nullable',
             'image' => 'nullable|image',
         ]);
 
@@ -72,6 +90,10 @@ class ProfileController extends Controller
             $user->phoneNumber = $request->input('phoneNumber');
         }
 
+        if ($request->filled('address')) {
+            $user->address = $request->input('address');
+        }
+
         if ($request->filled('birthDate')) {
             $user->birthDate = $request->input('birthDate');
         }
@@ -86,10 +108,10 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'shop_name' => 'required',
             'shop_email' => 'required|email|unique:sellers,shop_email',
-            'shop_phone_number' => 'required|size:11',
+            'shop_phone_number' => ['required', 'size:11', 'regex:/^09/'],
         ]);
 
-        if (!filter_var($validated['shop_email'], FILTER_VALIDATE_EMAIL) || !preg_match('/\.up@phinmaed\.com$/', $validated['shop_email'])) {
+        if (!filter_var($validated['shop_email'], FILTER_VALIDATE_EMAIL) || !preg_match('/\.up\@phinmaed\.com$/', $validated['shop_email'])) {
             return redirect()
                 ->back()
                 ->withInput()

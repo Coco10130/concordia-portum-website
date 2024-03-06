@@ -13,14 +13,19 @@
     width: 20px;
 }
 
-.product-item-text,
-.product-price,
-.price,
-.total-price,
+.item,
+.price-tag,
 .quantity,
+.total{
+    font-family: 'oswald';
+}
+
+.product-name,
+.product-price,
 .quantity-text,
-.product-item .product-name {
-    font-family: 'Kavoon', cursive;
+.total-price,
+.text {
+    font-family: 'Poppins';
 }
 
 .quantity-input .quantity {

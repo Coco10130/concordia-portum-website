@@ -47,7 +47,7 @@ class LoginController extends Controller
         if (User::where('email', $validated['email'])->exists()) {
             return redirect()
                 ->back()
-                ->withInput()
+                ->withInput(request()->except('password', 'password_confirmation'))
                 ->withErrors(['email' => 'Email already exists.']);
         }
 

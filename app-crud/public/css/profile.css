@@ -14,7 +14,7 @@
 }
 
 .placeholders {
-    background-color: #B2BEB5;
+    background-color: #c7c7c7;
     border-radius: 30px;
 }
 
@@ -66,10 +66,14 @@
 .upload-btn,
 .input-group input,
 .input-group-text,
-.form-check,
-.btn,
-.user-name {
-    font-family: 'Kavoon', cursive;
+.form-check {
+    font-family: 'oswald';
+}
+
+.user-name,
+.upload-btn,
+.btn {
+    font-family: 'poppins';
 }
 
 .navigation ul a:hover {
@@ -91,7 +95,9 @@
 .navigation a[href="/profile"].active,
 .navigation a[href="/profile"]:hover,
 .navigation a[href="/my-shop"].active,
-.navigation a[href="/my-shop"]:hover {
+.navigation a[href="/my-shop"]:hover, 
+.navigation a[href="/my-purchases"].active,
+.navigation a[href="/my-purchases"]:hover {
     color: #fff;
     background-color:#3eb489;
 }

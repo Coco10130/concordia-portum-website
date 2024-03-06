@@ -3,6 +3,10 @@
     top: 10px;
 }
 
+.navigation {
+    font-size: 20px;
+    font-family: 'oswald';
+}
 
 .product-card:hover {
     transform: scale(1.1);
@@ -29,6 +33,29 @@
     transition: 0.3s ease-in-out;
 }
 
-.product-link:hover {
-    background-color: #6f3df8;
+.price,
+.product-name,
+.text {
+    font-family: 'popppins';
+}
+
+.product-name {
+    font-size: 20px;
+}
+
+.nav ul li {
+    margin: 40px 0
+}
+
+.quantity-input {
+    width: 70px;
+    height: 30px;
+}
+
+.form-quantity label{
+    font-size: 12px;
+}
+
+.nav .nav-item .text {
+    color: #000000;
 }

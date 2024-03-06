@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ForgotPassController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/registerSeller', [AuthController::class, 'registerSeller']);
-});
-
 Route::post('/forgotPass', [ForgotPassController::class, 'forgotPassword']);
 
 Route::get('/showProducts', [ProductController::class, 'index']);
@@ -37,5 +34,12 @@ Route::post('/addProduct', [ProductController::class, 'store']);
 Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
 Route::post('/addToCart/{productId}', [ProductController::class, 'addToCart']);
 
-Route::post('/updateProfile', [ProfileController::class], 'updateProfile');
+Route::post('/updateProfile', [ProfileController::class, 'updateProfile']);
+Route::post('/registerSeller', [ProfileController::class, 'registerSeller']);
+Route::get('/showProfile', [ProfileController::class, 'showProfile']);
+Route::get('/myPurchase', [ProfileController::class, 'purchaseView']);
 
+Route::post('/addToCart', [CartController::class, 'addToCart']);
+Route::post('/checkOut', [CartController::class, 'checkOut']);
+Route::get('/checkOutView', [CartController::class, 'checkOutView']);
+Route::post('/checkOutView', [CartController::class, 'checkOutView']);

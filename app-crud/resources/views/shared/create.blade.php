@@ -27,6 +27,29 @@
         @enderror
     </div>
 
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity" min="0" required>
+        @error('quantity')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Violin">Violin</option>
+            <option value="Trumpet">Trumpet</option>
+            <option value="Saxophone">Saxophone</option>
+            <option value="Piano">Piano</option>
+            <option value="Clarinet">Clarinet</option>
+        </select>
+        @error('category')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 
     <style>

@@ -11,11 +11,11 @@
         </div>
 
         <div class="col-4 product-col mt-3 d-flex align-items-center justify-content-center">
-            <p class="product-item-text h4">Product Item</p>
+            <p class="item h4">Product Item</p>
         </div>
 
         <div class="col-2 product-col mt-3 d-flex align-items-center justify-content-center">
-            <p class="price h4">Price</p>
+            <p class="price-tag h4">Price</p>
         </div>
 
         <div class="col-2 product-col mt-3 d-flex align-items-center justify-content-center">
@@ -23,7 +23,7 @@
         </div>
 
         <div class="col product-col mt-3 d-flex align-items-center justify-content-center">
-            <p class="total-price h4">Total Price</p>
+            <p class="total h4">Total Price</p>
         </div>
 
         <div class="col-1 product-col mt-3 d-flex align-items-center justify-content-center">
@@ -39,7 +39,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-1 product-col mt-2 d-flex align-items-center justify-content-center">
                         <div class="select mt-2">
-                            <input class="form-check-input" type="checkbox" id="checkbox-{{ $index }}"
+                            <input class="form-check-input" type="checkbox" id="selected_product_{{ $index }}"
                                 name="product_ids[]" value="{{ $item->product_id }}" aria-label="...">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-2 product-col mt-2 d-flex align-items-center justify-content-center">
-                        <p class="quantity-text h4">{{ $item->quantity }}</p>
+                        <p class="quantity-text text h4">{{ $item->quantity }}</p>
                     </div>
 
                     <div class="col-2 product-col mt-2 d-flex align-items-center justify-content-center">
@@ -83,22 +83,14 @@
                 <div class="card cart-totals">
                     <div class="card-body">
                         <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-6 text-left">Subtotal:</div>
-                            <div class="col-6 text-right"><span id="subtotal-value">0.00</span></div>
+                            <div class="col-6 text text-left">Subtotal:</div>
+                            <div class="col-6 text text-right"><span id="subtotal-value">0.00</span></div>
                         </div>
                         <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-6 text-left">Tax:</div>
-                            <div class="col-6 text-right"><span id="tax-value">0.00</span></div>
+                            <div class="col-6 text text-left">Total Items:</div>
+                            <div class="col-6 text text-right"><span id="total-items-value">0</span></div>
                         </div>
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-6 text-left">Total Items:</div>
-                            <div class="col-6 text-right"><span id="total-items-value">0</span></div>
-                        </div>
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-6 text-left">Total:</div>
-                            <div class="col-6 text-right"><span id="total-value">0.00</span></div>
-                        </div>
-                        <button type="submit" class="btn btn-primary checkOutButton mt-3">Check Out</button>
+                        <button type="sumbit" class="btn text btn-outline-secondary checkOutButton mt-3">Check Out</button>
                     </div>
                 </div>
             </div>
@@ -121,14 +113,6 @@
 
         const subtotalElement = document.getElementById('subtotal-value');
         subtotalElement.textContent = formatCurrency(subtotal);
-
-        const tax = subtotal * 0.05;
-        const taxElement = document.getElementById('tax-value');
-        taxElement.textContent = formatCurrency(tax);
-
-        const total = subtotal + tax;
-        const totalElement = document.getElementById('total-value');
-        totalElement.textContent = formatCurrency(total);
 
         const totalItemsElement = document.getElementById('total-items-value');
         totalItemsElement.textContent = totalItems.toLocaleString();

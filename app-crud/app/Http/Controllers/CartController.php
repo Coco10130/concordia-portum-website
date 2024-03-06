@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Seller;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -27,21 +30,22 @@ class CartController extends Controller
         }
 
         $product = Product::findOrFail($productId);
+        $quantity = $request->input('quantity', 1);
 
-        $cart = $request->session()->get('cart', []);
+        $existingCartItem = Cart::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
 
-        if (isset($cart[$user->id][$productId])) {
-            $cart[$user->id][$productId]['quantity']++;
+        if ($existingCartItem) {
+            $existingCartItem->quantity += $quantity;
+            $existingCartItem->save();
         } else {
-            $cart[$user->id][$productId] = [
-                'name' => $product->product_name,
-                'price' => $product->price,
-                'image' => $product->image,
-                'quantity' => 1,
-            ];
+            $cartItem = new Cart();
+            $cartItem->user_id = $user->id;
+            $cartItem->product_id = $productId;
+            $cartItem->quantity = $quantity;
+            $cartItem->save();
         }
-
-        $request->session()->put('cart', $cart);
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
@@ -50,18 +54,70 @@ class CartController extends Controller
     {
         $checkedProductIds = $request->input('product_ids');
 
-        Cart::whereIn('product_id', $checkedProductIds)->delete();
-
-        return redirect()->route('cart.index')->with('success', 'Products already checked out!');
+        return redirect()->route('cart.checkout.view', ['product_ids' => $checkedProductIds]);
     }
 
-    public function removeItems(Request $request)
+    public function checkOutView(Request $request)
     {
-        $checkedProductIds = $request->input('product_ids');
+        $user = Auth::user();
+        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+        $selectedProductIds = $request->input('product_ids');
 
-        Cart::whereIn('product_id', $checkedProductIds)->delete();
+        $selectedProducts = Product::whereIn('id', $selectedProductIds)->with('seller')->get();
 
-        // Trigger JavaScript function to update total values
-        return redirect()->route('cart.index')->with('success', 'Products removed from cart successfully!');
+        $merchandiseSubtotal = 0;
+        foreach ($selectedProducts as $product) {
+            $cart = Cart::where('user_id', $user->id)
+                ->where('product_id', $product->id)
+                ->first();
+            $subtotal = $product->price * $cart->quantity;
+            $merchandiseSubtotal += $subtotal;
+        }
+
+        $shippingFee = 60;
+
+        $totalPayment = $merchandiseSubtotal + $shippingFee;
+
+        $groupedProducts = $selectedProducts->groupBy('seller.shop_name');
+
+        return view('check-out', compact('user', 'groupedProducts', 'merchandiseSubtotal', 'shippingFee', 'totalPayment', 'cartItemsCount', 'subtotal'));
+    }
+
+    public function placeOrder(Request $request)
+    {
+        $user = Auth::user();
+        $selectedProductIds = $request->input('product_ids');
+
+        if (!is_null($selectedProductIds)) {
+            foreach ($selectedProductIds as $productId) {
+                $cartItem = Cart::where('product_id', $productId)
+                    ->where('user_id', $user->id)
+                    ->first();
+
+                if ($cartItem) {
+                    $product = Product::find($productId);
+                    $product->quantity -= $cartItem->quantity;
+
+                    if ($product->quantity <= 0) {
+                        $product->delete();
+                    } else {
+                        $product->save();
+                    }
+
+                    $order = new Order();
+                    $order->shop_name = $product->seller->shop_name;
+                    $order->product_name = $product->product_name;
+                    $order->price = $product->price;
+                    $order->quantity = $cartItem->quantity;
+                    $order->image = $product->image;
+                    $order->user_id = $user->id;
+                    $order->save();
+
+                    $cartItem->delete();
+                }
+            }
+        }
+
+        return redirect()->route('cart.index')->with('success', 'Order placed successfully!');
     }
 }

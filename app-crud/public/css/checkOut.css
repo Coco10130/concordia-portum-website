@@ -1,0 +1,67 @@
+.placeholders {
+    background-color: #c7c7c7;
+    border-radius: 30px;
+    margin: 40px;
+    padding: 30px;
+}
+
+.address img {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+}
+
+.shop img {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+}
+
+.bottom-row {
+    border-bottom: 2px solid black;
+}
+
+.shopName-label,
+.quantity-label,
+.subtotal-label,
+.user-address,
+.product .product-name,
+.price,
+.quantity,
+.subtotal,
+.unit-label,
+.shipping-option,
+.shipping-fee,
+.payment-method {
+    font-family: 'poppins';
+}
+
+.shopName-label,
+.unit-label,
+.quantity-label,
+.subtotal-label,
+.user-address {
+    font-size: 20px;
+}
+
+.product .product-name,
+.price,
+.quantity,
+.subtotal  {
+    font-size: 17px;
+}
+
+.product-tag,
+.delivery-tag,
+.shipping-tag,
+.payment-tag,
+.payment-details {
+    font-family: 'oswald';
+}
+
+.product img {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 10px;
+}

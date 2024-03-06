@@ -1,7 +1,7 @@
 <form action="{{ route('login.auth') }}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <h1 class="text-center mb-5" style="font-family: 'Kavoon', cursive; color: #ffffff;">Login</h1>
+    <h1 class="text-center mb-5" style="font-family: 'oswald'; color: #ffffff;">Login</h1>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -19,12 +19,12 @@
     </div>
 
     <div class="text-end mb-3 mt-3">
-        <a class="forgot-pass" href="{{ route('forgot.password.view') }}"
+        <a class="forgot-pass text" href="{{ route('forgot.password.view') }}"
             style="text-decoration: none; color: #ffffff;">Forgot Password</a>
     </div>
 
     <div class="form-floating mt-3 d-flex justify-content-center">
-        <input type="submit" class="btn btn-outline-light" value="Login" name="submit">
+        <input type="submit" class="btn text btn-outline-light" value="Login" name="submit">
         <label for="remember-me" class="text-dark"></label>
     </div>
     @if (isset($message))

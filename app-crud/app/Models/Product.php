@@ -13,15 +13,22 @@ class Product extends Model
         'image',
         'product_name',
         'price',
-        'seller_id'
+        'seller_id',
+        'user_id',
+        'quantity',
+        'category'
     ];
 
     public function seller() {
-        return $this->belongsTo(Seller::class);
+        return $this->belongsTo(Seller::class, 'user_id', 'user_id');
     }
 
     public function carts() {
         return $this->hasMany(Cart::class);
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
 }
 

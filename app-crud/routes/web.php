@@ -36,19 +36,25 @@ Route::post('/login/authenticate', [LoginController::class, 'auth'])->name('logi
 
 Route::resource('profile', ProfileController::class);
 
-Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.updateProfile');
+Route::post('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/my-shop', [ProfileController::class, 'myShop'])->name('myShop');
+
+Route::get('/my-purchases', [ProfileController::class, 'purchaseView'])->name('myPurchases');
 
 Route::post('/register-seller', [ProfileController::class, 'registerSeller'])->name('registerSeller');
 
 Route::get('/register-seller', [ProfileController::class, 'registerView'])->name('registerView');
 
-Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->name('products.addToCart');
+Route::post('/products/{id}/addToCart', [CartController::class, 'addToCart'])->name('productsAddToCart');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::post('/cart/check-out', [CartController::class, 'checkOut'])->name('cart.checkout');
+
+Route::get('/check-out', [CartController::class, 'checkOutView'])->name('cart.checkout.view');
+
+Route::post('/place-order', [CartController::class, 'placeOrder'])->name('place.order');
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot.password.view');
 
