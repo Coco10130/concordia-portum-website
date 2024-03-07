@@ -27,6 +27,11 @@
                             <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
                         </div>
 
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" min="1" value="{{ $product->quantity }}">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('myShop') }}" class="btn btn-secondary">Cancel</a>
                     </form>

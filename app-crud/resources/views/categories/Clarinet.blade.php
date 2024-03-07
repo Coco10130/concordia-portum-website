@@ -7,7 +7,7 @@
             <div class="w-100"></div>
         @endif
 
-        <div class="col-4 prod-col">
+        <div class="col-4 mt-5 prod-col">
             <div class="card product-card" style="width: 283px">
                 <img src="{{ asset($product->image) }}" class="card-img-top" alt="Product Image">
                 <div class="card-body" style="border-top: 1px solid rgb(0, 0, 0)">

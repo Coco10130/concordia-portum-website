@@ -15,23 +15,25 @@ class ProductsController extends Controller
     {
         $user = auth()->user();
         $cartItemsCount = 0;
-
+    
         if ($user) {
             $cartItems = Cart::where('user_id', $user->id)->get();
             $cartItemsCount = $cartItems->count();
         }
-
+    
         $category = $request->query('category');
         $products = Product::query();
-
+    
         if ($category) {
+            $category = strtolower($category);
             $products->where('category', $category);
         }
-
+    
         $products = $products->get();
-
+    
         return view('dashboard', compact('category', 'products', 'cartItemsCount', 'user'));
     }
+    
 
     public function store(Request $request)
     {
@@ -136,6 +138,7 @@ class ProductsController extends Controller
             'image' => 'image',
             'product_name' => 'required|string|unique:products,product_name,' . $product->id,
             'price' => 'required|numeric',
+            'quantity' => 'required|numeric|min:1'
         ]);
 
         if ($request->has('image')) {
@@ -151,6 +154,7 @@ class ProductsController extends Controller
 
         $product->product_name = $request->product_name;
         $product->price = $request->price;
+        $product->quantity =+ $request->quantity;
         $product->save();
 
         return redirect()->route('myShop')->with('success', 'Product updated successfully!');

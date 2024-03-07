@@ -92,7 +92,12 @@
                                 <p class="shipping-tag h5"><b>Shipping Option</b></p>
                             </div>
                             <div class="col-3 text-center d-flex justify-content-center align-items-center">
-                                <p class="shipping-option">Standard Shipping <br> Get by 11-14 Mar</p>
+                                <?php
+                                $maxDeliveryDate = date('d M', strtotime('+5 days'));
+                                $minDeliveryDate = date('d M', strtotime('+3 days'));
+                                ?>
+                                <p class="shipping-option">Standard Shipping <br> Get by {{ $minDeliveryDate }} -
+                                    {{ $maxDeliveryDate }}</p>
                             </div>
                             <div class="col-3 text-center d-flex justify-content-center align-items-center">
                                 <p class="shipping-fee">₱ 60</p>
