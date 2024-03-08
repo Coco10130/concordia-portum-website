@@ -3,6 +3,10 @@
     top: 10px;
 }
 
+body {
+    background-image: linear-gradient(to left top, #020202, #3c3c3c, #787878, #b9b9b9, #ffffff); 
+}
+
 .navigation {
     font-size: 20px;
     font-family: 'oswald';

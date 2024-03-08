@@ -34,9 +34,7 @@
 
 <style>
     body {
-        background: url('/images/BG1.jpg');
-        background-repeat: no-repeat;
-        background-position: center;
+        background-image: linear-gradient(to left bottom, #2e2e2f, #5c5c5d, #8f8f90, #c6c6c6, #ffffff);
     }
 
     .card {
@@ -76,7 +74,7 @@
         margin-bottom: 20px;
         height: 70px;
         border-radius: 30px;
-        border: 2px solid rgb(0, 0, 0);
+        border: 5px solid rgb(0, 0, 0);
     }
 
     .form-floating #floatingInput {

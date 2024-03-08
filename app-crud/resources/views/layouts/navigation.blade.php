@@ -17,26 +17,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<style>
+    .body {
+        background-image: linear-gradient(to left top, #020202, #3c3c3c, #787878, #b9b9b9, #ffffff);
+    }
+</style>
+
+<body class="d-flex body flex-column min-vh-100">
 
     <div class="container-fluid outer-container flex-grow-1">
         @include('layouts.nav')
         {{-- content here --}}
-        
+
         @yield('content')
 
-        <footer class="bottom d-flex justify-content-center align-items-center">
-            <p>Concordia Portum</p>
-        </footer>
     </div>
+
+    @include('layouts.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
-    
+
     @yield('script')
 </body>
 

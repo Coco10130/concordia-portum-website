@@ -1,25 +1,26 @@
 <ul class="nav flex-column m-0">
     <li class="nav-item">
-        <a class="nav-link text {{ $category == 'violin' ? 'active' : '' }}"
+        <a class="nav-link text {{ strtolower($category) == 'violin' ? 'active' : '' }}"
             href="{{ route('products.index', ['category' => 'violin']) }}">Violin</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text {{ $category == 'trumpet' ? 'active' : '' }}"
+        <a class="nav-link text {{ strtolower($category) == 'trumpet' ? 'active' : '' }}"
             href="{{ route('products.index', ['category' => 'trumpet']) }}">Trumpet</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text {{ $category == 'saxophone' ? 'active' : '' }}"
+        <a class="nav-link text {{ strtolower($category) == 'saxophone' ? 'active' : '' }}"
             href="{{ route('products.index', ['category' => 'saxophone']) }}">Saxophone</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text {{ $category == 'piano' ? 'active' : '' }}"
+        <a class="nav-link text {{ strtolower($category) == 'piano' ? 'active' : '' }}"
             href="{{ route('products.index', ['category' => 'piano']) }}">Piano</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text {{ $category == 'clarinet' ? 'active' : '' }}"
+        <a class="nav-link text {{ strtolower($category) == 'clarinet' ? 'active' : '' }}"
             href="{{ route('products.index', ['category' => 'clarinet']) }}">Clarinet</a>
     </li>
 </ul>
+
 
 <style>
     ul {
@@ -53,8 +54,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-top: 2px solid #000000;
-        border-bottom: 2px solid #000000;
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
         transform: scaleY(2);
         opacity: 0;
         transition: .3s;
@@ -62,15 +63,21 @@
     }
 
     ul .nav-item .text:hover:before,
-    ul .nav-item .text.active:before,
+    ul .nav-item .text.active:before {
+        border-color: #000000;
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
     ul .nav-item .text:hover:after,
     ul .nav-item .text.active:after {
+        border-color: #000000;
         transform: scaleY(1);
         opacity: 1;
     }
 
     ul .nav-item .text:hover,
     ul .nav-item .text.active:hover {
-        color: #000000; /* Change font color to white */
+        color: #000000;
     }
 </style>

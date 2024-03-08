@@ -1,5 +1,5 @@
 @if ($products->isEmpty())
-    <div class="col d-flex justify-content-center align-items-center">No products available</div>
+    <div class="col price h3 d-flex justify-content-center align-items-center">No products available</div>
 @else
     @foreach ($products as $index => $product)
         @if ($index % 3 == 0)

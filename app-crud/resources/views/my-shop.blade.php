@@ -9,13 +9,13 @@
         <div class="col-2 mt-5 d-flex align-items-center" style="height: 70vh">
             <div class="navigation">
                 <ul>
-                    <a href="/profile" class="{{ Request::is('profile') ? 'active' : '' }} profile">My Profile</a>
+                    <a href="/profile" class="h5 {{ Request::is('profile') ? 'active' : '' }} profile">My Profile</a>
                 </ul>
                 <ul>
-                    <a href="/my-purchases" class="{{ Request::is('my-purchases') ? 'active' : '' }} my-purchase">My Purchase</a>
+                    <a href="/my-purchases" class="h5 {{ Request::is('my-purchases') ? 'active' : '' }} my-purchase">My Purchase</a>
                 </ul>
                 <ul>
-                    <a href="/my-shop" class="{{ Request::is('my-shop') ? 'active' : '' }} my-shop">My Shop</a>
+                    <a href="/my-shop" class="h5 {{ Request::is('my-shop') ? 'active' : '' }} my-shop">My Shop</a>
                 </ul>
             </div>
         </div>

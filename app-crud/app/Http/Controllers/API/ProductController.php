@@ -26,6 +26,7 @@ class ProductController extends Controller
         $products = Product::query();
 
         if ($category) {
+            $category = ucfirst(strtolower($category));
             $products->where('category', $category);
         }
 
@@ -90,6 +91,7 @@ class ProductController extends Controller
         }
 
         $product = Product::findOrFail($productId);
+
         $cart = $request->session()->get('cart', []);
 
         if (isset($cart[$user->id][$productId])) {
@@ -99,7 +101,7 @@ class ProductController extends Controller
                 'name' => $product->product_name,
                 'price' => $product->price,
                 'image' => $product->image,
-                'quantity' => 1,
+                'quantity' => $product->quantity,
             ];
         }
 
@@ -137,6 +139,7 @@ class ProductController extends Controller
             'image' => 'image',
             'product_name' => 'required|string|unique:products,product_name,' . $product->id,
             'price' => 'required|numeric',
+            'quantity' => 'required|numeric|min:1'
         ]);
 
         if ($request->has('image')) {
@@ -152,6 +155,7 @@ class ProductController extends Controller
 
         $product->product_name = $request->product_name;
         $product->price = $request->price;
+        $product->quantity = $request->quantity;
         $product->save();
 
         return response()->json(['message' => 'Product updated successfully'], 200);

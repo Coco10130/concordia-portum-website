@@ -1,5 +1,5 @@
 @if ($products->isEmpty())
-    <div class="col d-flex justify-content-center align-items-center">No products available</div>
+    <div class="col price h3 d-flex justify-content-center align-items-center">No products available</div>
 @else
     @foreach ($products as $index => $product)
         @if ($index % 3 == 0)
@@ -9,7 +9,7 @@
 
         <div class="col-4 mt-5 prod-col">
             <div class="card product-card" style="width: 283px">
-                <img src="{{ asset($product->image) }}" class="card-img-top" alt="Product Image">
+                <img src="/{{ asset($product->image) }}" class="card-img-top" alt="Product Image">
                 <div class="card-body" style="border-top: 1px solid rgb(0, 0, 0)">
                     <div class="d-flex justify-content-between">
                         <p class="price">{{ $product->seller->shop_name }}</p>

@@ -1,4 +1,4 @@
-<div id="carouselExampleFade" class="carousel slide carousel-fade" style="margin-top: 95px" data-bs-ride="carousel" data-bs-interval="2500">
+<div id="carouselExampleFade" class="carousel slide carousel-fade" style="margin-top: 95px" data-bs-ride="carousel" data-bs-interval="2000">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="/images/welcome-message.png" class="d-block w-100" alt="Welcome Image">

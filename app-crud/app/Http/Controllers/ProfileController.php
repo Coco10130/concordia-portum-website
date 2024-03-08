@@ -111,12 +111,6 @@ class ProfileController extends Controller
             'shop_phone_number' => ['required', 'size:11', 'regex:/^09/'],
         ]);
 
-        $validator = Validator::make($request->all(), $rules, $customErrorMessages);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $user = auth()->user();
         $user->is_seller = true;
         $user->save();

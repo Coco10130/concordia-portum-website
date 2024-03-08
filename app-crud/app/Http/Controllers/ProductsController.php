@@ -25,7 +25,7 @@ class ProductsController extends Controller
         $products = Product::query();
     
         if ($category) {
-            $category = strtolower($category);
+            $category = ucfirst(strtolower($category));
             $products->where('category', $category);
         }
     

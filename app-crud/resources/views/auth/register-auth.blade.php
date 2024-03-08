@@ -63,10 +63,7 @@
 
 <style>
     body {
-        background: url('/images/BG1.jpg');
-        background-repeat: no-repeat;
-        background-position: center;
-        /* background-size: cover; */
+        background-image: linear-gradient(to left bottom, #2e2e2f, #5c5c5d, #8f8f90, #c6c6c6, #ffffff);
     }
 
     .card {
