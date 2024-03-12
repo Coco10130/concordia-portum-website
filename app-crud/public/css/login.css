@@ -70,32 +70,11 @@
     font-family: 'Constantia', sans-serif;
 }
 
-@media only screen and (max-width: 600px) {
-
-    .container-fluid {
-        padding: 10px 0px;
-    }
-
-    .card {
-        width: 80%;
-        padding: 15px;
-    }
-
-    .form-floating #floatingInput,
-    .form-floating #floatingPassword {
-        background-size: 12px;
-        padding-left: 26px !important;
-    }
-
-    .form-floating label {
-        margin-left: 12px;
-    }
-
-    .btn {
-        width: 80px;
-    }
-
-    .form-label-custom {
-        font-size: 14px;
+@media only screen and (max-width: 767px) {
+    .row .top-nav img {
+        margin-right: 15px;
+        margin-left: 7vh;
+        height: 30px;
+        width: 75px;
     }
 }

@@ -1,7 +1,5 @@
 body {
-    background: url('/images/BG1.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
+    background-image: linear-gradient(to left top, #020202, #3c3c3c, #787878, #b9b9b9, #ffffff);
 }
 
 .card {

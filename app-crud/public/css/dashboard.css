@@ -17,6 +17,7 @@ body {
 }
 
 .product-card {
+    width: 283px;
     transition: 0.3s ease-in-out;
 }
 
@@ -62,4 +63,77 @@ body {
 
 .nav .nav-item .text {
     color: #000000;
+}
+
+@media only screen and (max-width: 767px) {
+    .product-container {
+        padding: 20px; /* Adjust padding for mobile */
+        top: 0; /* Adjust top position for mobile */
+    }
+
+    body {
+        background-image: none; /* Remove background image for mobile */
+        background-color: #ffffff; /* Set background color for mobile */
+    }
+
+    .navigation {
+        font-size: 16px; /* Adjust font size for mobile */
+    }
+
+    .product-card {
+        width: 100%; /* Make product cards full width for mobile */
+    }
+
+    .product-card img {
+        width: 100%; /* Make product images full width for mobile */
+        height: auto; /* Ensure aspect ratio for mobile */
+    }
+
+    .nav ul li {
+        margin: 20px 0; /* Adjust margin for mobile */
+    }
+
+    .product-row {
+        margin-left: 0; /* Adjust margin for mobile */
+    }
+
+    .prod-col {
+        padding-left: 15px; /* Adjust padding for mobile */
+        padding-right: 15px; /* Adjust padding for mobile */
+        margin-bottom: 20px; /* Add margin between product cards for mobile */
+    }
+
+    .col-2.navigation {
+        display: none; /* Hide navigation column on mobile */
+    }
+
+    .col-10 {
+        width: 100%; /* Make carousel full width for mobile */
+    }
+    .upper-row {
+        padding: 8px 0; /* Adjust padding for mobile */
+    }
+
+    .upper-row .col {
+        flex: 0 0 100%; /* Make columns full width for mobile */
+        text-align: center; /* Center align content for mobile */
+    }
+
+    .logo-img {
+        width: 100px; /* Adjust logo size for mobile */
+    }
+
+    .profile {
+        margin-left: 10px; /* Add margin between cart and profile for mobile */
+    }
+
+    .profile img {
+        width: 30px; /* Adjust profile image size for mobile */
+        height: 30px; /* Adjust profile image size for mobile */
+        border-radius: 50%; /* Make profile image circular for mobile */
+    }
+
+    .cart i {
+        font-size: 20px; /* Adjust cart icon size for mobile */
+    }
 }

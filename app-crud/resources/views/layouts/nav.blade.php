@@ -17,13 +17,7 @@
                     </div>
 
                     <div class="col-4">
-                        {{-- <div class="mx-auto">
-                            <div class="form-floating">
-                                <input type="text" class="form-control form-control-sm" id="search"
-                                    placeholder="Search">
-                                <label for="search">Search</label>
-                            </div>
-                        </div> --}}
+
                     </div>
 
                     <div class="col-3 d-flex align-items-center justify-content-center">
@@ -47,7 +41,7 @@
                             <div class="logout">
                                 <form action="{{ route('logout.auth') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-light mt-3" style="border: 1px solid #0000">
+                                    <button type="submit" class="btn btn-outline-dark mt-3" style="border: 1px solid #0000">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                                     </button>
                                 </form>

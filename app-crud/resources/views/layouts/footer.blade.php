@@ -76,37 +76,6 @@
         </div>
     </div>
 
-    <div class="row text-center">
-        <div class="col-3">
-            <div class="email">
-                <i class="fa fa-envelope" aria-hidden="true">
-                    <a href="">Email</a>
-                </i>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="email">
-                <i class="fa fa-envelope" aria-hidden="true">
-                    <a href="">Email</a>
-                </i>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="email">
-                <i class="fa fa-envelope" aria-hidden="true">
-                    <a href="">Email</a>
-                </i>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="email">
-                <i class="fa fa-envelope" aria-hidden="true">
-                    <a href="">Email</a>
-                </i>
-            </div>
-        </div>
-    </div>
-
     <p class="m-4">© 2024 Concordia Portum. All rights Reserved.</p>
 </footer>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seller;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
@@ -24,13 +25,13 @@ class ProfileController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            $path = '/images/';
+            $path = 'images/';
 
             if (!$file->move(public_path($path), $fileName)) {
                 return redirect()->back()->with('error', 'Failed to move the uploaded image file.');

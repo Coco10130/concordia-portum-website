@@ -18,15 +18,12 @@
     <div class="container-fluid"
         style="height: 100vh;">
         <div class="row">
-            <div class="col-4 top-nav">
+            <div class="col-12 top-nav">
                 <div class="logo d-flex align-items-center jusrify-content-between">
                     <img src="/images/cpLogo.png" alt="Logo">
                     <div class="border"></div>
                     <p class="h3 login-text">Login</p>
                 </div>
-            </div>
-            <div class="col top-nav">
-
             </div>
         </div>
         <div class="row mt-5">

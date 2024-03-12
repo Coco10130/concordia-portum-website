@@ -19,8 +19,11 @@
 
                 <div class="row bottom-row">
                     <div class="col" style="margin: 0 40px">
-                        @if ($user->address)
+                        @if ($user->address && $user->phoneNumber)
+                        <div class="address d-flex justify-content-between">
                             <p class="user-address h5">{{ $user->address }} </p>
+                            <p class="user-address h5">{{ $user->phoneNumber }} </p>
+                        </div>
                         @else
                             <p class="user-address h5">No Address</p>
                         @endif
@@ -45,15 +48,15 @@
                                     </div>
                                 </div>
 
-                                <div class="col-2 text-center">
+                                <div class="col-2 ">
                                     <p class="unit-label">Price</p>
                                 </div>
 
-                                <div class="col-2 text-center">
+                                <div class="col-2 ">
                                     <p class="quantity-label">Quantity</p>
                                 </div>
 
-                                <div class="col-2 text-center">
+                                <div class="col-2 ">
                                     <p class="subtotal-label">Subtotal</p>
                                 </div>
                             </div>
@@ -68,17 +71,17 @@
                                             <p class="product-name">{{ $product->product_name }}</p>
                                         </div>
                                     </div>
-                                    <div class="col-2 d-flex justify-content-center align-items-center">
+                                    <div class="col-2 d-flex justify-content-start align-items-center">
                                         <p class="price">₱ {{ number_format($product->price, 2) }}</p>
                                     </div>
-                                    <div class="col-2 d-flex justify-content-center align-items-center">
+                                    <div class="col-2 d-flex justify-content-start align-items-center">
                                         <p class="quantity">
                                             @foreach ($product->carts as $cart)
                                                 {{ $cart->quantity }}
                                             @endforeach
                                         </p>
                                     </div>
-                                    <div class="col-2 d-flex justify-content-center align-items-center">
+                                    <div class="col-2 d-flex justify-content-start align-items-center">
                                         <p class="subtotal">₱ {{ number_format($product->price * $cart->quantity, 2) }}</p>
                                     </div>
                                 </div>
@@ -100,7 +103,7 @@
                                     {{ $maxDeliveryDate }}</p>
                             </div>
                             <div class="col-3 text-center d-flex justify-content-center align-items-center">
-                                <p class="shipping-fee">₱ 60</p>
+                                <p class="shipping-fee">₱ {{ number_format($shippingFee, 2) }}</p>
                             </div>
                         </div>
 
@@ -133,8 +136,9 @@
                             </div>
 
                             <div class="col-4">
-                                <div class="row mb-4">
-                                    <div class="col-12"></div>
+                                <div class="row">
+                                    <div class="col-9 text-left">Discount:</div>
+                                    <div class="col-3 text-right">10%</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-9 text-left">Total Payment</div>

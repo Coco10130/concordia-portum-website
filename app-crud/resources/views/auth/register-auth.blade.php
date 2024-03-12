@@ -112,4 +112,108 @@
     .form-control {
         border-radius: 20px;
     }
+    @media only screen and (max-width: 767px) {
+        .card {
+            margin-right: 0;
+            margin-left: 0;
+            padding: 15px;
+            border: none;
+            background-color: #ffffff00;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffffff;
+        }
+
+        .row .top-nav img {
+            height: 60px;
+            width: 60px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .card {
+            margin-right: 0;
+            margin-left: 0;
+            padding: 15px;
+            border: none;
+            background-color: #ffffff00;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffffff;
+        }
+
+        .row .top-nav img {
+            height: 60px;
+            width: 60px;
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+        .card {
+            margin-right: 0;
+            /* Adjust margins for tablet */
+            margin-left: 0;
+            /* Adjust margins for tablet */
+            padding: 20px;
+            /* Adjust padding for tablet */
+        }
+
+        .row .top-nav img {
+            height: 50px;
+            /* Adjust height of the logo for tablet */
+            width: auto;
+            /* Allow the width to adjust automatically */
+        }
+    }
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        .card {
+            margin-right: 0;
+            /* Adjust margins for tablet */
+            margin-left: 0;
+            /* Adjust margins for tablet */
+            padding: 20px;
+            /* Adjust padding for tablet */
+        }
+
+        .row .top-nav img {
+            height: 50px;
+            /* Adjust height of the logo for tablet */
+            width: auto;
+            /* Allow the width to adjust automatically */
+        }
+    }
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+
+        .card {
+            margin-right: 0;
+            /* Adjust margins for tablet */
+            margin-left: 0;
+            /* Adjust margins for tablet */
+            padding: 20px;
+            /* Adjust padding for tablet */
+        }
+
+        .row .top-nav img {
+            height: 50px;
+            /* Adjust height of the logo for tablet */
+            width: auto;
+            /* Allow the width to adjust automatically */
+        }
+        @media only screen and (min-width: 1024px) {
+            .card {
+            margin-right: 0;
+            /* Adjust margins for tablet */
+            margin-left: 0;
+            /* Adjust margins for tablet */
+            padding: 20px;
+            /* Adjust padding for tablet */
+        }
+
+        .row .top-nav img {
+            height: 50px;
+            /* Adjust height of the logo for tablet */
+            width: auto;
+            /* Allow the width to adjust automatically */
+        }
+    }
 </style>

@@ -17,7 +17,7 @@
                                 @if (isset($user->image) && $user->image != '')
                                     <img src="{{ asset($user->image) }}" alt="Profile" id="profileImage">
                                 @else
-                                    <img src="/images/profiles/default-picture.png" alt="Profile" id="profileImage">
+                                    <img src="/images/default-picture.png" alt="Profile" id="profileImage">
                                 @endif
                             </div>
                         </div>
@@ -28,7 +28,7 @@
 
                             <div class="change-profile">
                                 {{-- change profile pic --}}
-                                <label for="imageInput" class="upload-btn">
+                                <label for="imageInput" class="upload-btn"  style="border: 1px solid #000000">
                                     Change Image
                                     <input type="file" id="imageInput" name="image" accept="image/*">
                                 </label>

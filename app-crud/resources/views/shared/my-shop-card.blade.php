@@ -73,8 +73,8 @@
         margin: 30px 0px;
     }
 
-    .placeholders {
-        background-color: #c7c7c7;
+    .placeholderss {
+        background-color: #ffffff;
         border-radius: 30px;
     }
 

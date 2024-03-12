@@ -113,19 +113,25 @@ class ProductController extends Controller
     public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);
-
+    
         if ($product->user_id !== auth()->user()->id) {
             return response()->json(['error' => 'Unauthorized access'], 403);
         }
-
-        $product->carts()->delete();
-
+    
+        // Check if there are any associated carts and delete them if present
+        if ($product->carts()->exists()) {
+            $product->carts()->delete();
+        }
+    
+        // Delete the product's image from storage
         Storage::delete($product->image);
-
+    
+        // Delete the product
         $product->delete();
-
+    
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+    
 
     public function updateProduct(Request $request, $id)
     {

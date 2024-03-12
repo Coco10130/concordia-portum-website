@@ -10,6 +10,19 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $cartItems = Cart::where('user_id', $user)->get();
+        $cartItemsCount = $cartItems->count();
+
+        return response()->json([
+            'cartItems' => $cartItems,
+            'cartItemsCount' => $cartItemsCount,
+            'user' => $user,
+        ]);
+    }
+
     public function addToCart(Request $request, $productId)
     {
         $user = Auth::user();
@@ -67,9 +80,28 @@ class CartController extends Controller
             $merchandiseSubtotal += $subtotal;
         }
 
-        $shippingFee = 60;
+        $shippingFee = 0;
+        $shopsWithPiano = [];
+        foreach ($selectedProducts as $product) {
+            $category = strtolower($product->category);
+            if ($category === 'piano') {
+                $shopsWithPiano[$product->seller->shop_name] = true;
+                $shippingFee += 200;
+            } elseif (in_array($category, ['violin', 'trumpet', 'saxophone', 'clarinet'])) {
+                $shippingFee += 100;
+            }
+        }
 
-        $totalPayment = $merchandiseSubtotal + $shippingFee;
+        foreach ($shopsWithPiano as $shop => $hasPiano) {
+            if ($hasPiano && count($selectedProducts->where('seller.shop_name', $shop)) > 1) {
+                $shippingFee -= 200;
+                $shippingFee += 250;
+            }
+        }
+
+        $discount = $merchandiseSubtotal * 0.1;
+
+        $totalPayment = $merchandiseSubtotal + $shippingFee - $discount;
 
         $groupedProducts = $selectedProducts->groupBy('seller.shop_name');
 
@@ -80,7 +112,7 @@ class CartController extends Controller
             'shippingFee' => $shippingFee,
             'totalPayment' => $totalPayment,
             'cartItemsCount' => $cartItemsCount,
-            'subtotal' => $subtotal
+            'subtotal' => $subtotal,
         ]);
     }
 
