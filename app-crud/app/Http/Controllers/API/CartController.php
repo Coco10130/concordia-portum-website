@@ -13,13 +13,51 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $cartItems = Cart::where('user_id', $user)->get();
+
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with('product')
+            ->get();
         $cartItemsCount = $cartItems->count();
 
+        $formattedCartItems = [];
+        foreach ($cartItems as $cartItem) {
+            $product = $cartItem->product;
+            $formattedCartItems[] = [
+                'product_name' => $product->product_name,
+                'price' => $product->price,
+                'quantity' => $cartItem->quantity,
+                'image' => $product->image,
+            ];
+        }
+
         return response()->json([
-            'cartItems' => $cartItems,
+            'cartItems' => $formattedCartItems,
             'cartItemsCount' => $cartItemsCount,
             'user' => $user,
+        ]);
+    }
+
+    public function indexAndroid()
+    {
+        $user = Auth()->user();
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItemsArray = $cartItems->map(function ($item) {
+            return [
+                'product_name' => $item->product_name,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'image' => $item->image,
+            ];
+        });
+
+        return response()->json([
+            'cartItems' => $cartItemsArray,
+            'cartItemsCount' => $cartItems->count(),
+            'user' => $user->toArray(),
         ]);
     }
 
@@ -58,7 +96,7 @@ class CartController extends Controller
 
     public function checkOut(Request $request)
     {
-        $checkedProductIds = $request->input('product_ids');
+        $checkedProductIds = $request->input('product_id');
 
         return response()->json(['product_ids' => $checkedProductIds], 200);
     }
@@ -67,7 +105,11 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $cartItemsCount = Cart::where('user_id', $user->id)->count();
-        $selectedProductIds = $request->input('product_ids');
+        $selectedProductIds = $request->input('product_id');
+
+        if (!is_array($selectedProductIds)) {
+            $selectedProductIds = [];
+        }
 
         $selectedProducts = Product::whereIn('id', $selectedProductIds)->with('seller')->get();
 
@@ -76,8 +118,11 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $user->id)
                 ->where('product_id', $product->id)
                 ->first();
-            $subtotal = $product->price * $cart->quantity;
-            $merchandiseSubtotal += $subtotal;
+
+            if ($cart) {
+                $subtotal = $product->price * $cart->quantity;
+                $merchandiseSubtotal += $subtotal;
+            }
         }
 
         $shippingFee = 0;
@@ -92,10 +137,13 @@ class CartController extends Controller
             }
         }
 
-        foreach ($shopsWithPiano as $shop => $hasPiano) {
-            if ($hasPiano && count($selectedProducts->where('seller.shop_name', $shop)) > 1) {
-                $shippingFee -= 200;
-                $shippingFee += 250;
+        if (is_iterable($shopsWithPiano)) {
+            foreach ($shopsWithPiano as $shop => $hasPiano) {
+                $productsInShop = $selectedProducts->where('seller.shop_name', $shop);
+                if ($hasPiano && is_iterable($productsInShop) && $productsInShop->count() > 1) {
+                    $shippingFee -= 200;
+                    $shippingFee += 250;
+                }
             }
         }
 
@@ -112,14 +160,13 @@ class CartController extends Controller
             'shippingFee' => $shippingFee,
             'totalPayment' => $totalPayment,
             'cartItemsCount' => $cartItemsCount,
-            'subtotal' => $subtotal,
         ]);
     }
 
     public function placeOrder(Request $request)
     {
         $user = Auth::user();
-        $selectedProductIds = $request->input('product_ids');
+        $selectedProductIds = $request->input('product_id');
 
         if (!is_null($selectedProductIds)) {
             foreach ($selectedProductIds as $productId) {

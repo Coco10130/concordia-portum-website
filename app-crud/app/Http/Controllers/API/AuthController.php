@@ -8,22 +8,26 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
-
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $token = $user->createToken('AuthToken')->plainTextToken;
 
-            return response()->json(['user' => $user]);
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+            return response()->json(['user' => $user, 'token' => $token]);
         }
+
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
     }
 
     public function register(Request $request)
@@ -55,5 +59,4 @@ class AuthController extends Controller
         Auth::logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
-    
 }

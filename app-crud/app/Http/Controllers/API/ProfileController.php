@@ -106,21 +106,25 @@ class ProfileController extends Controller
 
     public function purchaseView(Request $request)
     {
-        $user = Auth::user();
-        $cartItemsCount = Cart::where('user_id', $user->id)->count();
+        try {
+            $user = Auth::user();
+            $cartItemsCount = Cart::where('user_id', $user->id)->count();
 
-        $orders = Order::where('user_id', $user->id)
-            ->with([
-                'product' => function ($query) {
-                    $query->with('seller');
-                },
-            ])
-            ->get();
+            $orders = Order::where('user_id', $user->id)
+                ->with([
+                    'product' => function ($query) {
+                        $query->with('seller');
+                    },
+                ])
+                ->get();
 
-        return response()->json([
-            'cartItemsCount' => $cartItemsCount,
-            'user' => $user,
-            'orders' => $orders,
-        ]);
+            return response()->json([
+                'cartItemsCount' => $cartItemsCount,
+                'user' => $user,
+                'orders' => $orders,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

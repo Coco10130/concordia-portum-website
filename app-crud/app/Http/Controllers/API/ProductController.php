@@ -80,14 +80,8 @@ class ProductController extends Controller
 
     public function addToCart(Request $request, $productId)
     {
-        if (!auth()->check()) {
-            return response()->json(['error' => 'Unauthorized access. Please provide a valid token.'], 401);
-        }
-
-        $user = User::where('token', Hash::make($request->bearerToken()))->first();
-
         if (!$user) {
-            return response()->json(['error' => 'Invalid token. Please log in again.'], 401);
+            return response()->json(['error' => 'Not Authorized'], 401);
         }
 
         $product = Product::findOrFail($productId);
